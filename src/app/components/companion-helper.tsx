@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useVoice } from '../contexts/voice-context';
 import { useSettings } from '../contexts/settings-context';
 import { pickPhrase } from '../lib/voice/coaching';
@@ -29,6 +29,7 @@ export function CompanionHelper({
   const [isWiggling, setIsWiggling] = useState(false);
   const { speak } = useVoice();
   const { language } = useSettings();
+  const hasGreeted = useRef(false);
 
   useEffect(() => {
     const savedCompanion = localStorage.getItem('userCompanion');
@@ -38,7 +39,8 @@ export function CompanionHelper({
   }, []);
 
   useEffect(() => {
-    if (!companion || !autoGreet) return
+    if (!companion || !autoGreet || hasGreeted.current) return
+    hasGreeted.current = true
     const timer = setTimeout(() => {
       const msg = pickPhrase(language, 'game_start')
       setCurrentMessage(msg)
