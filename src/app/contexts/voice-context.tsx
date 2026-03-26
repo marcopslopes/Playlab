@@ -87,8 +87,14 @@ export function VoiceProvider({ children }: { children: ReactNode }) {
     const v = localStorage.getItem('cc-voice-volume')
     const s = localStorage.getItem('cc-voice-speed')
     if (m !== null) setMutedState(m === 'true')
-    if (v !== null) setVolumeState(parseFloat(v))
-    if (s !== null) setSpeedState(parseFloat(s))
+    if (v !== null) {
+      const parsed = parseFloat(v)
+      if (Number.isFinite(parsed) && parsed >= 0 && parsed <= 1) setVolumeState(parsed)
+    }
+    if (s !== null) {
+      const parsed = parseFloat(s)
+      if (Number.isFinite(parsed) && parsed >= 0.5 && parsed <= 2) setSpeedState(parsed)
+    }
   }, [])
 
   const setMuted = (v: boolean) => {
@@ -139,6 +145,14 @@ export function VoiceProvider({ children }: { children: ReactNode }) {
         const blob = await res.blob()
         const url = URL.createObjectURL(blob)
         audioCache.set(trimmed, url)
+        // Evict oldest entry if cache exceeds 50 items
+        if (audioCache.size > 50) {
+          const firstKey = audioCache.keys().next().value
+          if (firstKey !== undefined) {
+            URL.revokeObjectURL(audioCache.get(firstKey)!)
+            audioCache.delete(firstKey)
+          }
+        }
         playBlobUrl(url, volume, speed)
       } catch {
         // Network error or /api/tts not available locally — use Web Speech

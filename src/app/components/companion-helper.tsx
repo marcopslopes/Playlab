@@ -38,41 +38,41 @@ export function CompanionHelper({
   }, []);
 
   useEffect(() => {
-    if (companion && autoGreet) {
-      setTimeout(() => {
-        showGreeting();
-      }, 500);
-    }
-  }, [companion, autoGreet]);
+    if (!companion || !autoGreet) return
+    const timer = setTimeout(() => {
+      const msg = pickPhrase(language, 'game_start')
+      setCurrentMessage(msg)
+      speak(msg)
+      setShowMessage(true)
+      setIsWiggling(true)
+      setTimeout(() => setIsWiggling(false), 600)
+      setTimeout(() => setShowMessage(false), 3000)
+    }, 500)
+    return () => clearTimeout(timer)
+  }, [companion, autoGreet, language, speak])
 
   useEffect(() => {
-    if (message) {
-      showCustomMessage(message);
+    if (!message) return
+    setCurrentMessage(message)
+    speak(message)
+    setShowMessage(true)
+    setIsWiggling(true)
+    const wiggleTimer = setTimeout(() => setIsWiggling(false), 600)
+    const hideTimer = setTimeout(() => setShowMessage(false), 3000)
+    return () => {
+      clearTimeout(wiggleTimer)
+      clearTimeout(hideTimer)
     }
-  }, [message]);
-
-  const showGreeting = () => {
-    const msg = pickPhrase(language, 'game_start');
-    setCurrentMessage(msg);
-    speak(msg);
-    setShowMessage(true);
-    setIsWiggling(true);
-    setTimeout(() => setIsWiggling(false), 600);
-    setTimeout(() => setShowMessage(false), 3000);
-  };
-
-  const showCustomMessage = (msg: string) => {
-    setCurrentMessage(msg);
-    speak(msg);
-    setShowMessage(true);
-    setIsWiggling(true);
-    setTimeout(() => setIsWiggling(false), 600);
-    setTimeout(() => setShowMessage(false), 3000);
-  };
+  }, [message, speak])
 
   const handleClick = () => {
-    const msg = pickPhrase(language, 'companion_cheer');
-    showCustomMessage(msg);
+    const msg = pickPhrase(language, 'companion_cheer')
+    setCurrentMessage(msg)
+    speak(msg)
+    setShowMessage(true)
+    setIsWiggling(true)
+    setTimeout(() => setIsWiggling(false), 600)
+    setTimeout(() => setShowMessage(false), 3000)
   };
 
   if (!companion) return null;
