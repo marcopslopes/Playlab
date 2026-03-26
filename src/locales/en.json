@@ -83,6 +83,7 @@
     "childAge": "Child's Age",
     "ageLabel": "Age: {age} years old",
     "autoSave": "Settings are saved automatically and apply to the entire app experience.",
+    "childName": "Child's Name",
     "voice": "Voice",
     "voiceOn": "Voice On",
     "voiceOff": "Voice Off",

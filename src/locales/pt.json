@@ -83,6 +83,7 @@
     "childAge": "Idade da Criança",
     "ageLabel": "Idade: {age} anos",
     "autoSave": "As definições são guardadas automaticamente e aplicam-se a toda a experiência.",
+    "childName": "Nome da Criança",
     "voice": "Voz",
     "voiceOn": "Voz Ligada",
     "voiceOff": "Voz Desligada",

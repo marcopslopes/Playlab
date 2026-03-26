@@ -6,7 +6,7 @@ import { useVoice } from '../contexts/voice-context';
 import { OutdoorBackground } from './outdoor-background';
 
 export function Settings() {
-  const { theme, language, age, setTheme, setLanguage, setAge } = useSettings();
+  const { theme, language, age, childName, setTheme, setLanguage, setAge, setChildName } = useSettings();
   const { t } = useTranslation();
   const { muted, volume, speed, setMuted, setVolume, setSpeed } = useVoice();
 
@@ -137,6 +137,46 @@ export function Settings() {
                 </button>
               ))}
             </div>
+          </div>
+
+          {/* Child Name Setting */}
+          <div
+            className="rounded-3xl p-6"
+            style={{
+              backgroundColor: theme === 'dark' ? 'rgba(228, 220, 207, 0.1)' : 'rgba(31, 32, 35, 0.05)',
+              backdropFilter: 'blur(10px)',
+            }}
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <User className="w-6 h-6" style={{ color: '#C08B7E' }} />
+              <h2
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: '1.25rem',
+                  fontWeight: 600,
+                }}
+              >
+                {t('settings.childName')}
+              </h2>
+            </div>
+            <input
+              type="text"
+              value={childName}
+              onChange={(e) => setChildName(e.target.value)}
+              maxLength={20}
+              placeholder="Explorer"
+              style={{
+                width: '100%',
+                padding: '12px 16px',
+                borderRadius: '1rem',
+                border: 'none',
+                fontFamily: 'var(--font-body)',
+                fontSize: '1.125rem',
+                background: theme === 'dark' ? 'rgba(228,220,207,0.15)' : 'rgba(125,157,156,0.15)',
+                color: theme === 'dark' ? '#E4DCCF' : '#1F2023',
+                outline: 'none',
+              }}
+            />
           </div>
 
           {/* Age Setting */}

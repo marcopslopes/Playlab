@@ -14,22 +14,15 @@ interface Companion {
 
 export function DailySession() {
   const navigate = useNavigate();
-  const { theme } = useSettings();
+  const { theme, childName } = useSettings();
   const { t } = useTranslation();
   const [companion, setCompanion] = useState<Companion | null>(null);
-  const [userName, setUserName] = useState<string>('Friend');
 
   useEffect(() => {
     // Load companion from localStorage
     const savedCompanion = localStorage.getItem('userCompanion');
     if (savedCompanion) {
       setCompanion(JSON.parse(savedCompanion));
-    }
-    
-    // Load user name if exists
-    const savedName = localStorage.getItem('userName');
-    if (savedName) {
-      setUserName(savedName);
     }
   }, []);
 
@@ -192,7 +185,7 @@ export function DailySession() {
                 color: '#1F2023',
               }}
             >
-              {getGreeting()}, {userName}!
+              {getGreeting()}, {childName}!
             </h1>
             <p 
               style={{ 
