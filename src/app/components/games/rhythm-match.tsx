@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { ArrowLeft, Star } from 'lucide-react';
 import { OutdoorBackground } from '../outdoor-background';
@@ -39,6 +39,7 @@ export function RhythmMatch() {
   const [mistakes, setMistakes] = useState(0);
   const [isRecording, setIsRecording] = useState(false);
   const [recordingBeat, setRecordingBeat] = useState(0);
+  const recordingIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const totalRounds = getRoundsForLevel('intermediate'); // Intermediate course = 4 rounds
   const { message, celebrate, encourage } = useCompanionMessage();
 
@@ -79,10 +80,13 @@ export function RhythmMatch() {
     setRecordingBeat(0);
     
     // Auto-advance through beats
-    const interval = setInterval(() => {
+    recordingIntervalRef.current = setInterval(() => {
       setRecordingBeat(prev => {
         if (prev >= targetRhythm.pattern.length - 1) {
-          clearInterval(interval);
+          if (recordingIntervalRef.current) {
+            clearInterval(recordingIntervalRef.current);
+            recordingIntervalRef.current = null;
+          }
           setIsRecording(false);
           return prev;
         }
@@ -124,7 +128,7 @@ export function RhythmMatch() {
           if (currentRound + 1 < totalRounds) {
             setCurrentRound(currentRound + 1);
           } else {
-            completeGame(stars);
+            completeGame(mistakes, stars);
             setTimeout(() => navigate('/game/music'), 500);
           }
         }, 1500);
@@ -140,6 +144,11 @@ export function RhythmMatch() {
       }
     }
   }, [isRecording]);
+
+  // Cleanup interval on unmount
+  useEffect(() => () => {
+    if (recordingIntervalRef.current) clearInterval(recordingIntervalRef.current);
+  }, []);
 
   if (!targetRhythm) return null;
 

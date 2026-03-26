@@ -97,7 +97,7 @@ export function ColorMixingLab() {
         if (currentRound + 1 < totalRounds) {
           setCurrentRound(currentRound + 1);
         } else {
-          completeGame(stars);
+          completeGame(mistakes, stars);
           setTimeout(() => navigate('/game/creative'), 500);
         }
       }, 2000);

@@ -36,6 +36,7 @@ export function ConstellationCreator() {
   const [showNaming, setShowNaming] = useState(false);
   const [currentRound, setCurrentRound] = useState(0);
   const [gameStars] = useState(3);
+  const [mistakes] = useState(0);
   const totalRounds = getRoundsForLevel('advanced'); // 5 rounds
   const { message, celebrate } = useCompanionMessage();
 
@@ -194,7 +195,7 @@ export function ConstellationCreator() {
       if (currentRound + 1 < totalRounds) {
         setCurrentRound(currentRound + 1);
       } else {
-        completeGame(gameStars);
+        completeGame(mistakes, gameStars);
         setTimeout(() => navigate('/game/creative'), 500);
       }
     }, 1500);
