@@ -35,20 +35,26 @@ export default defineConfig(({ mode }) => {
             req.on('data', (chunk) => { body += chunk.toString() })
             req.on('end', async () => {
               try {
-                const { text } = JSON.parse(body) as { text?: string }
+                const { text, language = 'en' } = JSON.parse(body) as { text?: string; language?: string }
                 if (!text?.trim()) { res.writeHead(400); res.end('text is required'); return }
 
-                console.log('[TTS dev] generating audio for:', text.trim().slice(0, 50))
+                console.log('[TTS dev] generating audio for:', text.trim().slice(0, 50), '| lang:', language)
+
+                const isPT = language === 'pt'
+                const PT_INSTRUCTIONS =
+                  'Speak in European Portuguese (Portugal) accent — not Brazilian. ' +
+                  'Clear, calm, and friendly for young children.'
 
                 // Dynamic import avoids ESM/CJS issues in Vite config context
                 const { default: OpenAI } = await import('openai')
                 const openai = new OpenAI({ apiKey })
                 const response = await openai.audio.speech.create({
-                  model: 'tts-1',
+                  model: isPT ? 'gpt-4o-mini-tts' : 'tts-1',
                   voice: 'nova',
                   input: text.trim().slice(0, 300),
                   response_format: 'mp3',
-                })
+                  ...(isPT ? { instructions: PT_INSTRUCTIONS } : {}),
+                } as any)
 
                 const buffer = Buffer.from(await response.arrayBuffer())
                 res.writeHead(200, {

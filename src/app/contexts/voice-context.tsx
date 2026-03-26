@@ -133,7 +133,7 @@ export function VoiceProvider({ children }: { children: ReactNode }) {
         const res = await fetch('/api/tts', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text: trimmed }),
+          body: JSON.stringify({ text: trimmed, language }),
         })
 
         const contentType = res.headers.get('content-type') || ''
