@@ -30,6 +30,9 @@ export function CompanionHelper({
   const { speak } = useVoice();
   const { language } = useSettings();
   const hasGreeted = useRef(false);
+  // Stable ref so effects don't re-fire when VoiceContext recreates speak
+  const speakRef = useRef(speak);
+  useEffect(() => { speakRef.current = speak }, [speak]);
 
   useEffect(() => {
     const savedCompanion = localStorage.getItem('userCompanion');
@@ -44,19 +47,19 @@ export function CompanionHelper({
     const timer = setTimeout(() => {
       const msg = pickPhrase(language, 'game_start')
       setCurrentMessage(msg)
-      speak(msg)
+      speakRef.current(msg)
       setShowMessage(true)
       setIsWiggling(true)
       setTimeout(() => setIsWiggling(false), 600)
       setTimeout(() => setShowMessage(false), 3000)
-    }, 500)
+    }, 100)
     return () => clearTimeout(timer)
-  }, [companion, autoGreet, language, speak])
+  }, [companion, autoGreet, language])
 
   useEffect(() => {
     if (!message) return
     setCurrentMessage(message)
-    speak(message)
+    speakRef.current(message)
     setShowMessage(true)
     setIsWiggling(true)
     const wiggleTimer = setTimeout(() => setIsWiggling(false), 600)
@@ -65,7 +68,7 @@ export function CompanionHelper({
       clearTimeout(wiggleTimer)
       clearTimeout(hideTimer)
     }
-  }, [message, speak])
+  }, [message])
 
   const handleClick = () => {
     const msg = pickPhrase(language, 'companion_cheer')
@@ -150,28 +153,15 @@ export function CompanionHelper({
   );
 }
 
-// Hook to trigger companion messages from any game component
+// Hook to trigger companion messages from any game component.
+// Only sets message state — CompanionHelper's effect handles speaking to avoid double-audio.
 export function useCompanionMessage() {
   const [message, setMessage] = useState<string>('');
-  const { speak } = useVoice();
   const { language } = useSettings();
 
-  const celebrate = () => {
-    const msg = pickPhrase(language, 'correct');
-    setMessage(msg);
-    speak(msg);
-  };
-
-  const encourage = () => {
-    const msg = pickPhrase(language, 'wrong');
-    setMessage(msg);
-    speak(msg);
-  };
-
-  const cheer = (customMsg: string) => {
-    setMessage(customMsg);
-    speak(customMsg);
-  };
+  const celebrate = () => setMessage(pickPhrase(language, 'correct'));
+  const encourage = () => setMessage(pickPhrase(language, 'wrong'));
+  const cheer = (customMsg: string) => setMessage(customMsg);
 
   return { message, celebrate, encourage, cheer };
 }
