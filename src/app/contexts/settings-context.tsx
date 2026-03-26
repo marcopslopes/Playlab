@@ -2,24 +2,24 @@ import { createContext, useContext, useState, useEffect, ReactNode } from 'react
 
 interface SettingsContextType {
   theme: 'light' | 'dark';
-  language: 'en' | 'pt';
+  language: 'en' | 'pt' | 'es' | 'ca';
   age: number;
   setTheme: (theme: 'light' | 'dark') => void;
-  setLanguage: (language: 'en' | 'pt') => void;
+  setLanguage: (language: 'en' | 'pt' | 'es' | 'ca') => void;
   setAge: (age: number) => void;
 }
 
 const SettingsContext = createContext<SettingsContextType | undefined>(undefined);
 
 export function SettingsProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<'light' | 'dark'>('dark');
-  const [language, setLanguageState] = useState<'en' | 'pt'>('en');
+  const [theme, setThemeState] = useState<'light' | 'dark'>('light');
+  const [language, setLanguageState] = useState<'en' | 'pt' | 'es' | 'ca'>('en');
   const [age, setAgeState] = useState<number>(6);
 
   // Load settings from localStorage on mount
   useEffect(() => {
     const savedTheme = localStorage.getItem('cc-theme') as 'light' | 'dark' | null;
-    const savedLanguage = localStorage.getItem('cc-language') as 'en' | 'pt' | null;
+    const savedLanguage = localStorage.getItem('cc-language') as 'en' | 'pt' | 'es' | 'ca' | null;
     const savedAge = localStorage.getItem('cc-age');
 
     if (savedTheme) setThemeState(savedTheme);
@@ -32,7 +32,7 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('cc-theme', newTheme);
   };
 
-  const setLanguage = (newLanguage: 'en' | 'pt') => {
+  const setLanguage = (newLanguage: 'en' | 'pt' | 'es' | 'ca') => {
     setLanguageState(newLanguage);
     localStorage.setItem('cc-language', newLanguage);
   };
