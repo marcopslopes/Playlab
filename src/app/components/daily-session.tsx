@@ -220,7 +220,7 @@ export function DailySession() {
                   textTransform: 'uppercase',
                 }}
               >
-                {companion.name.split(' ')[1]}
+                {companion.name.split(' ').slice(1).join(' ') || companion.name.split(' ')[0]}
               </p>
             </div>
           </div>
