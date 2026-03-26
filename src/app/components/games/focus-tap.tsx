@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { ArrowLeft, Star } from 'lucide-react';
 import { useGameProgress } from '../../hooks/use-game-progress';
+import { useTranslation } from '../../hooks/use-translation';
 
 const colors = ['#7D9D9C', '#C08B7E', '#7C8B95', '#FDB022'];
 
@@ -15,6 +16,7 @@ interface Bubble {
 
 export function FocusTap() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { completeGame } = useGameProgress({ 
     gameId: 'focus/beginner/focus-tap', 
     categoryId: 'focus' 
@@ -120,7 +122,7 @@ export function FocusTap() {
             className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 transition-colors mb-6"
           >
             <ArrowLeft className="w-5 h-5" />
-            <span style={{ fontSize: '0.9375rem' }}>BACK</span>
+            <span style={{ fontSize: '0.9375rem' }}>{t('games.back')}</span>
           </Link>
 
           <div className="flex items-center justify-between mb-6">
@@ -253,7 +255,7 @@ export function FocusTap() {
                   color: '#7C8B95',
                 }}
               >
-                Score: {score}
+                {t('games.score')}: {score}
               </p>
             </div>
           </div>

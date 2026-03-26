@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { ArrowLeft, Trash2, Check } from 'lucide-react';
 import { useGameProgress } from '../../hooks/use-game-progress';
+import { useTranslation } from '../../hooks/use-translation';
 
 const colors = ['#7D9D9C', '#C08B7E', '#7C8B95', '#FDB022', '#FF6B6B'];
 
@@ -15,7 +16,8 @@ const prompts = [
 
 export function CreativeDraw() {
   const navigate = useNavigate();
-  const { completeGame } = useGameProgress({ 
+  const { t } = useTranslation();
+  const { completeGame } = useGameProgress({
     gameId: 'creative/beginner/creative-draw', 
     categoryId: 'creative' 
   });
@@ -125,7 +127,7 @@ export function CreativeDraw() {
             className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 transition-colors mb-6"
           >
             <ArrowLeft className="w-5 h-5" />
-            <span style={{ fontSize: '0.9375rem' }}>BACK</span>
+            <span style={{ fontSize: '0.9375rem' }}>{t('games.back')}</span>
           </Link>
         </div>
 

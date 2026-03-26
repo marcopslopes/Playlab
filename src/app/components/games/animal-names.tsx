@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { ArrowLeft, Star, Volume2 } from 'lucide-react';
 import { OutdoorBackground } from '../outdoor-background';
 import { useGameProgress } from '../../hooks/use-game-progress';
+import { useTranslation } from '../../hooks/use-translation';
 
 interface LetterItem {
   letter: string;
@@ -25,6 +26,7 @@ const LETTERS: LetterItem[] = [
 ];
 
 export function AnimalNames() {
+  const { t } = useTranslation();
   const { completeGame } = useGameProgress({ 
     gameId: 'languages/beginner/animal-names', 
     categoryId: 'languages' 
@@ -235,7 +237,7 @@ export function AnimalNames() {
             className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 transition-colors mb-6"
           >
             <ArrowLeft className="w-5 h-5" />
-            <span style={{ fontSize: '0.9375rem' }}>BACK</span>
+            <span style={{ fontSize: '0.9375rem' }}>{t('games.back')}</span>
           </Link>
 
           {/* Progress */}
@@ -271,7 +273,7 @@ export function AnimalNames() {
                 {currentRound + 1} / {TOTAL_ROUNDS}
               </div>
               <p style={{ fontSize: '0.875rem', color: '#6b7280' }}>
-                Score: {score}
+                {t('games.score')}: {score}
               </p>
             </div>
           </div>

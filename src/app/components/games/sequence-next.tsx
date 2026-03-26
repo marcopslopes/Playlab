@@ -4,6 +4,7 @@ import { ArrowLeft, Check, X, Star } from 'lucide-react';
 import { OutdoorBackground } from '../outdoor-background';
 import { CompanionHelper, useCompanionMessage } from '../companion-helper';
 import { useSettings } from '../../contexts/settings-context';
+import { useTranslation } from '../../hooks/use-translation';
 import { useGameProgress } from '../../hooks/use-game-progress';
 import { getRoundsForLevel } from '../../utils/game-config';
 
@@ -23,6 +24,7 @@ interface SequenceItem {
 export function SequenceNext() {
   const navigate = useNavigate();
   const { theme } = useSettings();
+  const { t } = useTranslation();
   const { completeGame } = useGameProgress({ 
     gameId: 'logic/intermediate/sequence-next', 
     categoryId: 'logic' 
@@ -229,7 +231,7 @@ export function SequenceNext() {
             className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 transition-colors mb-6"
           >
             <ArrowLeft className="w-5 h-5" />
-            <span style={{ fontSize: '0.9375rem' }}>BACK</span>
+            <span style={{ fontSize: '0.9375rem' }}>{t('games.back')}</span>
           </Link>
 
           {/* Progress & Stars */}
@@ -367,7 +369,7 @@ export function SequenceNext() {
                   textTransform: 'uppercase',
                 }}
               >
-                {isCorrect ? 'YES! ✨' : 'TRY AGAIN!'}
+                {isCorrect ? t('games.correct') : t('games.tryAgain')}
               </p>
               
               <p 

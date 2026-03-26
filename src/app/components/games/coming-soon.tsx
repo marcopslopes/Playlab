@@ -2,6 +2,7 @@ import { useNavigate, useLocation } from 'react-router';
 import { ArrowLeft, Sparkles } from 'lucide-react';
 import { OutdoorBackground } from '../outdoor-background';
 import { useSettings } from '../../contexts/settings-context';
+import { useTranslation } from '../../hooks/use-translation';
 
 interface ComingSoonProps {
   gameName: string;
@@ -12,6 +13,7 @@ interface ComingSoonProps {
 export function ComingSoon({ gameName, gameEmoji, categoryPath }: ComingSoonProps) {
   const navigate = useNavigate();
   const { theme } = useSettings();
+  const { t } = useTranslation();
 
   return (
     <div 
@@ -28,7 +30,7 @@ export function ComingSoon({ gameName, gameEmoji, categoryPath }: ComingSoonProp
           style={{ color: theme === 'dark' ? '#E4DCCF' : '#6b7280' }}
         >
           <ArrowLeft className="w-5 h-5" />
-          <span style={{ fontSize: '0.9375rem' }}>BACK</span>
+          <span style={{ fontSize: '0.9375rem' }}>{t('games.back')}</span>
         </button>
 
         <div className="text-8xl mb-6 animate-bounce">
@@ -62,7 +64,7 @@ export function ComingSoon({ gameName, gameEmoji, categoryPath }: ComingSoonProp
               textTransform: 'uppercase',
             }}
           >
-            COMING SOON!
+            {t('games.comingSoon')}
           </span>
         </div>
 
@@ -70,7 +72,7 @@ export function ComingSoon({ gameName, gameEmoji, categoryPath }: ComingSoonProp
           className="mb-8"
           style={{ fontSize: '1.125rem', maxWidth: '500px', margin: '0 auto', color: theme === 'dark' ? 'rgba(228, 220, 207, 0.7)' : '#6b7280' }}
         >
-          This game is being created! Check back soon for a new adventure.
+          {t('games.comingSoonMsg')}
         </p>
 
         <button
@@ -86,7 +88,7 @@ export function ComingSoon({ gameName, gameEmoji, categoryPath }: ComingSoonProp
             boxShadow: '0 4px 16px rgba(125, 157, 156, 0.3)',
           }}
         >
-          BACK TO GAMES
+          {t('games.backToCategories')}
         </button>
       </div>
     </div>

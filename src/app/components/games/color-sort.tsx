@@ -4,6 +4,7 @@ import { ArrowLeft, Star } from 'lucide-react';
 import { OutdoorBackground } from '../outdoor-background';
 import { CompanionHelper, useCompanionMessage } from '../companion-helper';
 import { useSettings } from '../../contexts/settings-context';
+import { useTranslation } from '../../hooks/use-translation';
 import { useGameProgress } from '../../hooks/use-game-progress';
 import { getRoundsForLevel } from '../../utils/game-config';
 
@@ -22,6 +23,7 @@ interface Item {
 export function ColorSort() {
   const navigate = useNavigate();
   const { theme } = useSettings();
+  const { t } = useTranslation();
   const { completeGame } = useGameProgress({ 
     gameId: 'logic/beginner/color-sort', 
     categoryId: 'logic' 
@@ -128,7 +130,7 @@ export function ColorSort() {
             style={{ color: theme === 'dark' ? '#E4DCCF' : '#6b7280' }}
           >
             <ArrowLeft className="w-5 h-5" />
-            <span style={{ fontSize: '0.9375rem' }}>Back</span>
+            <span style={{ fontSize: '0.9375rem' }}>{t('games.back')}</span>
           </Link>
           
           <div className="flex items-center gap-8">
@@ -152,7 +154,7 @@ export function ColorSort() {
             {/* Stars */}
             <div>
               <p className="mb-1 text-center" style={{ fontSize: '0.75rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.05em', color: theme === 'dark' ? 'rgba(228, 220, 207, 0.5)' : '#9ca3af' }}>
-                Your Score
+                {t('games.score')}
               </p>
               <div className="flex gap-1.5">
                 {[1, 2, 3].map((star) => (

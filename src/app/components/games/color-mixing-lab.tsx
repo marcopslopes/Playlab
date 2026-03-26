@@ -4,6 +4,7 @@ import { ArrowLeft, Star, Sparkles } from 'lucide-react';
 import { OutdoorBackground } from '../outdoor-background';
 import { CompanionHelper, useCompanionMessage } from '../companion-helper';
 import { useSettings } from '../../contexts/settings-context';
+import { useTranslation } from '../../hooks/use-translation';
 import { useGameProgress } from '../../hooks/use-game-progress';
 import { getRoundsForLevel } from '../../utils/game-config';
 
@@ -19,6 +20,7 @@ const colorMixes = [
 export function ColorMixingLab() {
   const navigate = useNavigate();
   const { theme } = useSettings();
+  const { t } = useTranslation();
   const { completeGame } = useGameProgress({ 
     gameId: 'creative/beginner/color-mixing-lab', 
     categoryId: 'creative' 
@@ -143,7 +145,7 @@ export function ColorMixingLab() {
             }}
           >
             <ArrowLeft className="w-5 h-5" />
-            <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600 }}>Back</span>
+            <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600 }}>{t('games.back')}</span>
           </Link>
 
           <div className="flex items-center gap-1">

@@ -4,12 +4,14 @@ import { ArrowLeft, Star } from 'lucide-react';
 import { OutdoorBackground } from '../outdoor-background';
 import { CompanionHelper, useCompanionMessage } from '../companion-helper';
 import { useSettings } from '../../contexts/settings-context';
+import { useTranslation } from '../../hooks/use-translation';
 import { useGameProgress } from '../../hooks/use-game-progress';
 import { getRoundsForLevel } from '../../utils/game-config';
 
 export function NumberCounting() {
   const navigate = useNavigate();
   const { theme } = useSettings();
+  const { t } = useTranslation();
   const { completeGame } = useGameProgress({ 
     gameId: 'logic/beginner/number-counting', 
     categoryId: 'logic' 
@@ -125,9 +127,9 @@ export function NumberCounting() {
             style={{ color: theme === 'dark' ? '#E4DCCF' : '#6b7280' }}
           >
             <ArrowLeft className="w-5 h-5" />
-            <span style={{ fontSize: '0.9375rem' }}>Back</span>
+            <span style={{ fontSize: '0.9375rem' }}>{t('games.back')}</span>
           </Link>
-          
+
           <div className="flex items-center gap-8">
             {/* Round Counter */}
             <div className="text-center">
@@ -149,14 +151,14 @@ export function NumberCounting() {
             {/* Stars */}
             <div>
               <p className="mb-1 text-center" style={{ fontSize: '0.75rem', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.05em', color: theme === 'dark' ? 'rgba(228, 220, 207, 0.5)' : '#9ca3af' }}>
-                Your Score
+                {t('games.score')}
               </p>
               <div className="flex gap-1.5">
                 {[1, 2, 3].map((star) => (
                   <Star
                     key={star}
                     className="w-6 h-6"
-                    style={{ 
+                    style={{
                       color: star <= stars ? '#FDB022' : '#e5e7eb',
                       fill: star <= stars ? '#FDB022' : 'none',
                       filter: star <= stars ? 'drop-shadow(0 2px 4px rgba(253, 176, 34, 0.3))' : 'none',
@@ -302,7 +304,7 @@ export function NumberCounting() {
                     marginBottom: '2rem',
                   }}
                 >
-                  {isCorrect ? '✨ GREAT! ✨' : '❤️ TRY AGAIN ❤️'}
+                  {isCorrect ? t('games.correct') : t('games.tryAgain')}
                 </h2>
                 
                 {/* Continue Button */}
@@ -320,9 +322,9 @@ export function NumberCounting() {
                     width: '100%',
                   }}
                 >
-                  {isCorrect 
+                  {isCorrect
                     ? (currentRound < totalRounds - 1 ? 'NEXT →' : 'DONE ✓')
-                    : 'TRY AGAIN'}
+                    : t('games.tryAgain')}
                 </button>
               </div>
             </div>

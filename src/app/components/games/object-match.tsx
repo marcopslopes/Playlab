@@ -4,6 +4,7 @@ import { ArrowLeft, Star, Volume2, RotateCcw } from 'lucide-react';
 import { OutdoorBackground } from '../outdoor-background';
 import { CompanionHelper, useCompanionMessage } from '../companion-helper';
 import { useGameProgress } from '../../hooks/use-game-progress';
+import { useTranslation } from '../../hooks/use-translation';
 
 interface ObjectItem {
   id: string;
@@ -40,6 +41,7 @@ const OBJECTS: ObjectItem[] = [
 ];
 
 export function ObjectMatch() {
+  const { t } = useTranslation();
   const { completeGame } = useGameProgress({ 
     gameId: 'languages/beginner/object-match', 
     categoryId: 'languages' 
@@ -259,7 +261,7 @@ export function ObjectMatch() {
             className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 transition-colors mb-6"
           >
             <ArrowLeft className="w-5 h-5" />
-            <span style={{ fontSize: '0.9375rem' }}>BACK</span>
+            <span style={{ fontSize: '0.9375rem' }}>{t('games.back')}</span>
           </Link>
 
           {/* Progress */}
@@ -295,7 +297,7 @@ export function ObjectMatch() {
                 {currentRound + 1} / {TOTAL_ROUNDS}
               </div>
               <p style={{ fontSize: '0.875rem', color: '#6b7280' }}>
-                Score: {score}
+                {t('games.score')}: {score}
               </p>
             </div>
           </div>
