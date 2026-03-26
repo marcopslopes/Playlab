@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import confetti from 'canvas-confetti';
 import { Sparkles } from 'lucide-react';
 import { useSettings } from '../contexts/settings-context';
+import { useTranslation } from '../hooks/use-translation';
 
 interface Achievement {
   id: string;
@@ -18,6 +19,7 @@ interface AchievementCelebrationProps {
 
 export function AchievementCelebration({ achievement, onClose }: AchievementCelebrationProps) {
   const { theme } = useSettings();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (achievement) {
@@ -126,7 +128,7 @@ export function AchievementCelebration({ achievement, onClose }: AchievementCele
                   marginBottom: '1.5rem',
                 }}
               >
-                Achievement Unlocked!
+                {t('achievements.unlocked')}
               </motion.p>
 
               {/* Achievement emoji */}
@@ -186,7 +188,7 @@ export function AchievementCelebration({ achievement, onClose }: AchievementCele
                   letterSpacing: '0.05em',
                 }}
               >
-                Tap to continue
+                {t('achievements.tapToContinue')}
               </motion.p>
             </motion.div>
           </motion.div>

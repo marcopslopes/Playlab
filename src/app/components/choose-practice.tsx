@@ -1,12 +1,11 @@
 import { Link, useNavigate } from 'react-router';
 import { ArrowLeft, Brain, Lightbulb, Target, BookOpen, Shapes, Sparkles, Shuffle, RotateCcw, Calculator, Palette, Languages, Settings, BarChart, Flower2, Music } from 'lucide-react';
 import { useSettings } from '../contexts/settings-context';
+import { useTranslation } from '../hooks/use-translation';
 
 const categories = [
   {
     id: 'logic',
-    title: 'Logic',
-    description: 'Patterns & puzzles',
     icon: Brain,
     color: '#7D9D9C',
     route: '/game/logic',
@@ -14,8 +13,6 @@ const categories = [
   },
   {
     id: 'memory',
-    title: 'Memory',
-    description: 'Remember & match',
     icon: Lightbulb,
     color: '#C08B7E',
     route: '/game/memory',
@@ -23,8 +20,6 @@ const categories = [
   },
   {
     id: 'focus',
-    title: 'Focus',
-    description: 'Stay sharp!',
     icon: Target,
     color: '#7C8B95',
     route: '/game/focus',
@@ -32,8 +27,6 @@ const categories = [
   },
   {
     id: 'words',
-    title: 'Words',
-    description: 'Letters & stories',
     icon: BookOpen,
     color: '#C08B7E',
     route: '/game/words',
@@ -41,8 +34,6 @@ const categories = [
   },
   {
     id: 'math',
-    title: 'Math',
-    description: 'Numbers & counting',
     icon: Calculator,
     color: '#FDB022',
     route: '/game/math',
@@ -50,8 +41,6 @@ const categories = [
   },
   {
     id: 'colors',
-    title: 'Colors',
-    description: 'Mix & match hues',
     icon: Palette,
     color: '#FF6B6B',
     route: '/game/colors',
@@ -59,8 +48,6 @@ const categories = [
   },
   {
     id: 'shapes',
-    title: 'Shapes',
-    description: 'Rotate & match',
     icon: Shapes,
     color: '#7D9D9C',
     route: '/game/shapes',
@@ -68,8 +55,6 @@ const categories = [
   },
   {
     id: 'creative',
-    title: 'Creative',
-    description: 'Draw & imagine',
     icon: Sparkles,
     color: '#7C8B95',
     route: '/game/creative',
@@ -77,8 +62,6 @@ const categories = [
   },
   {
     id: 'music',
-    title: 'Music',
-    description: 'Sounds & rhythms',
     icon: Music,
     color: '#9B59B6',
     route: '/game/music',
@@ -86,8 +69,6 @@ const categories = [
   },
   {
     id: 'languages',
-    title: 'Languages',
-    description: 'Learn Portuguese',
     icon: Languages,
     color: '#4A90E2',
     route: '/game/languages',
@@ -98,13 +79,14 @@ const categories = [
 export function ChoosePractice() {
   const navigate = useNavigate();
   const { theme } = useSettings();
+  const { t } = useTranslation();
 
   const handleStartSession = () => {
     const randomCategory = categories[Math.floor(Math.random() * categories.length)];
     if (randomCategory?.route) {
       navigate(randomCategory.route);
     } else {
-      alert(`${randomCategory?.title} games coming soon!`);
+      alert(`${t(`categories.items.${randomCategory?.id}.title`)} games coming soon!`);
     }
   };
 
@@ -140,7 +122,7 @@ export function ChoosePractice() {
               }}
             >
               <ArrowLeft className="w-5 h-5" />
-              <span style={{ fontSize: '0.9375rem' }}>Home</span>
+              <span style={{ fontSize: '0.9375rem' }}>{t('nav.home')}</span>
             </Link>
             
             {/* Parent Controls */}
@@ -158,7 +140,7 @@ export function ChoosePractice() {
                 }}
               >
                 <Flower2 className="w-4 h-4" />
-                <span>Garden</span>
+                <span>{t('nav.garden')}</span>
               </Link>
               
               <Link
@@ -174,7 +156,7 @@ export function ChoosePractice() {
                 }}
               >
                 <BarChart className="w-4 h-4" />
-                <span>Dashboard</span>
+                <span>{t('nav.dashboard')}</span>
               </Link>
               
               <Link
@@ -190,7 +172,7 @@ export function ChoosePractice() {
                 }}
               >
                 <Settings className="w-4 h-4" />
-                <span>Settings</span>
+                <span>{t('nav.settings')}</span>
               </Link>
               
               <button
@@ -206,7 +188,7 @@ export function ChoosePractice() {
                 }}
               >
                 <RotateCcw className="w-4 h-4" />
-                <span>Restart</span>
+                <span>{t('nav.restart')}</span>
               </button>
             </div>
           </div>
@@ -221,7 +203,7 @@ export function ChoosePractice() {
                 color: theme === 'dark' ? '#E4DCCF' : '#1F2023',
               }}
             >
-              Choose Your Practice
+              {t('categories.title')}
             </h1>
             <p 
               style={{ 
@@ -229,7 +211,7 @@ export function ChoosePractice() {
                 color: theme === 'dark' ? 'rgba(228, 220, 207, 0.7)' : '#6b7280',
               }}
             >
-              What would you like to work on today?
+              {t('categories.subtitle')}
             </p>
           </div>
         </div>
@@ -277,25 +259,25 @@ export function ChoosePractice() {
                 </div>
 
                 {/* Category Info */}
-                <h2 
+                <h2
                   className="mb-2"
-                  style={{ 
+                  style={{
                     fontFamily: 'var(--font-display)',
                     fontSize: '1.375rem',
                     fontWeight: 600,
                     color: theme === 'dark' ? '#E4DCCF' : '#1F2023',
                   }}
                 >
-                  {category.title}
+                  {t(`categories.items.${category.id}.title`)}
                 </h2>
-                
-                <p 
-                  style={{ 
+
+                <p
+                  style={{
                     fontSize: '0.9375rem',
                     color: theme === 'dark' ? 'rgba(228, 220, 207, 0.7)' : '#6b7280',
                   }}
                 >
-                  {category.description}
+                  {t(`categories.items.${category.id}.description`)}
                 </p>
 
                 {/* Coming Soon Badge */}
@@ -309,7 +291,7 @@ export function ChoosePractice() {
                       fontWeight: 500,
                     }}
                   >
-                    Coming Soon
+                    {t('categories.comingSoon')}
                   </div>
                 )}
               </button>
@@ -341,7 +323,7 @@ export function ChoosePractice() {
               e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.15)';
             }}
           >
-            Start Practice
+            {t('categories.startPractice')}
           </button>
         </div>
       </div>

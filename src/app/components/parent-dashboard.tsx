@@ -2,11 +2,13 @@ import { Link } from 'react-router';
 import { ArrowLeft, Star, Trophy, TrendingUp, Award, Calendar, Flower2 } from 'lucide-react';
 import { useSettings } from '../contexts/settings-context';
 import { useProgress } from '../contexts/progress-context';
+import { useTranslation } from '../hooks/use-translation';
 import { OutdoorBackground } from './outdoor-background';
 
 export function ParentDashboard() {
   const { theme } = useSettings();
   const { progress } = useProgress();
+  const { t } = useTranslation();
 
   const totalGames = 81; // 9 categories × 9 games
   const maxStars = totalGames * 3; // 243 stars total
@@ -61,7 +63,7 @@ export function ParentDashboard() {
           }}
         >
           <ArrowLeft className="w-5 h-5" />
-          <span style={{ fontSize: '0.9375rem' }}>BACK</span>
+          <span style={{ fontSize: '0.9375rem' }}>{t('dashboard.back')}</span>
         </Link>
 
         {/* Header */}
@@ -75,7 +77,7 @@ export function ParentDashboard() {
               textTransform: 'uppercase',
             }}
           >
-            Parent Dashboard 📊
+            {t('dashboard.title')} 📊
           </h1>
           <p 
             style={{ 
@@ -108,7 +110,7 @@ export function ParentDashboard() {
               {progress.totalStars}
             </div>
             <div style={{ fontSize: '0.875rem', opacity: 0.7 }}>
-              Total Stars
+              {t('dashboard.totalStars')}
             </div>
             <div style={{ fontSize: '0.75rem', opacity: 0.5 }}>
               out of {maxStars}
@@ -134,7 +136,7 @@ export function ParentDashboard() {
               {progress.totalGamesCompleted}
             </div>
             <div style={{ fontSize: '0.875rem', opacity: 0.7 }}>
-              Games Done
+              {t('dashboard.totalSessions')}
             </div>
             <div style={{ fontSize: '0.75rem', opacity: 0.5 }}>
               out of {totalGames}
@@ -186,7 +188,7 @@ export function ParentDashboard() {
               {progress.streakDays}
             </div>
             <div style={{ fontSize: '0.875rem', opacity: 0.7 }}>
-              Day Streak
+              {t('dashboard.currentStreak')}
             </div>
             <div style={{ fontSize: '0.75rem', opacity: 0.5 }}>
               keep it going!
@@ -202,15 +204,15 @@ export function ParentDashboard() {
             backdropFilter: 'blur(10px)',
           }}
         >
-          <h2 
+          <h2
             className="mb-6"
-            style={{ 
+            style={{
               fontFamily: 'var(--font-display)',
               fontSize: '1.5rem',
               fontWeight: 600,
             }}
           >
-            Progress by Category
+            {t('dashboard.progress')}
           </h2>
 
           <div className="space-y-4">
@@ -339,7 +341,7 @@ export function ParentDashboard() {
                 fontWeight: 600,
               }}
             >
-              Achievements ({progress.achievements.length})
+              {t('dashboard.achievements')} ({progress.achievements.length})
             </h2>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
