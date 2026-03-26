@@ -1,0 +1,123 @@
+{
+  "onboarding": {
+    "tapToStart": "TOCA PER COMENÇAR",
+    "startingUp": "Iniciant...",
+    "tapAColor": "TOCA UN COLOR! 🎨",
+    "colors": {
+      "red": "VERMELL",
+      "blue": "BLAU",
+      "green": "VERD",
+      "yellow": "GROC"
+    },
+    "findLetterTitle": "TROBA LA LLETRA M! ⌨️",
+    "findLetterHint": "Mira el teu teclat i prem la tecla M",
+    "foundIt": "L'HAS TROBAT! ✨",
+    "findNumberTitle": "TROBA EL NÚMERO 5! 🔢",
+    "findNumberHint": "Mira el teu teclat i prem la tecla 5",
+    "awesome": "FANTÀSTIC! ⭐",
+    "didIt": "✨ HO HAS ACONSEGUIT! ✨",
+    "knowKeyboard": "Ja coneixes el teclat!",
+    "startLearning": "COMENCEM A APRENDRE! 🚀"
+  },
+  "companion": {
+    "chooseTitle": "Tria el Teu Amic",
+    "chooseSubtitle": "Qui aprendrà amb tu avui?",
+    "selectButton": "Triar Aquest Amic!",
+    "companions": {
+      "owl": { "name": "MUSSOL SAVI", "personality": "Tranquil i Reflexiu" },
+      "bunny": { "name": "CONILL FELIÇ", "personality": "Gentil i Juganer" },
+      "fox": { "name": "GUINEU LLESTA", "personality": "Intel·ligent i Amigable" },
+      "bear": { "name": "ÓS AMABLE", "personality": "Càlid i Afectuós" },
+      "cat": { "name": "GAT DOLÇ", "personality": "Curiós i Acollidor" },
+      "dog": { "name": "GOS LLEIAL", "personality": "Alegre i Valent" }
+    },
+    "messages": [
+      "Ho estàs fent molt bé!",
+      "Aprenem junts!",
+      "Estic molt orgullós de tu!",
+      "Preparat per divertir-te?"
+    ]
+  },
+  "daily": {
+    "greetingMorning": "Bon Dia",
+    "greetingAfternoon": "Bona Tarda",
+    "greetingEvening": "Bona Nit",
+    "readyForPractice": "Preparat per a la pràctica d'avui?",
+    "startPractice": "Començar Pràctica",
+    "starsEarned": "Estrelles Guanyades",
+    "dayStreak": "Dies Seguits",
+    "completed": "Completats"
+  },
+  "categories": {
+    "title": "Tria la Teva Pràctica",
+    "subtitle": "Què vols treballar avui?",
+    "startPractice": "Començar Pràctica",
+    "comingSoon": "Pròximament",
+    "items": {
+      "logic": { "title": "Lògica", "description": "Patrons i puzzles" },
+      "memory": { "title": "Memòria", "description": "Recorda i combina" },
+      "focus": { "title": "Atenció", "description": "Mantén-te atent!" },
+      "words": { "title": "Paraules", "description": "Lletres i històries" },
+      "math": { "title": "Matemàtiques", "description": "Números i comptar" },
+      "colors": { "title": "Colors", "description": "Barreja i combina" },
+      "shapes": { "title": "Formes", "description": "Gira i combina" },
+      "creative": { "title": "Creatiu", "description": "Dibuixa i imagina" },
+      "music": { "title": "Música", "description": "Sons i ritmes" },
+      "languages": { "title": "Idiomes", "description": "Aprèn noves paraules" }
+    }
+  },
+  "nav": {
+    "back": "Tornar",
+    "home": "Inici",
+    "garden": "Jardí",
+    "dashboard": "Tauler",
+    "settings": "Configuració",
+    "restart": "Reiniciar"
+  },
+  "settings": {
+    "title": "Configuració ⚙️",
+    "theme": "Tema",
+    "light": "☀️ Clar",
+    "dark": "🌙 Fosc",
+    "language": "Idioma",
+    "childAge": "Edat del Nen",
+    "ageLabel": "Edat: {age} anys",
+    "autoSave": "La configuració es desa automàticament i s'aplica a tota l'experiència.",
+    "languages": {
+      "en": "🇬🇧 English",
+      "pt": "🇵🇹 Português",
+      "es": "🇪🇸 Español",
+      "ca": "🏴 Català"
+    }
+  },
+  "achievements": {
+    "unlocked": "Assoliment Desbloquejat!",
+    "tapToContinue": "Toca per continuar"
+  },
+  "garden": {
+    "title": "El Teu Jardí",
+    "subtitle": "Cada flor floreix mentre aprens",
+    "back": "Tornar"
+  },
+  "dashboard": {
+    "title": "Tauler dels Pares",
+    "progress": "Progrés",
+    "achievements": "Assoliments",
+    "totalSessions": "Total de Sessions",
+    "totalStars": "Total d'Estrelles",
+    "currentStreak": "Ratxa Actual",
+    "back": "Tornar"
+  },
+  "games": {
+    "back": "Tornar",
+    "correct": "Correcte! 🎉",
+    "tryAgain": "Torna-ho a intentar!",
+    "wellDone": "Molt bé! ⭐",
+    "amazing": "Increïble! 🌟",
+    "score": "Puntuació",
+    "level": "Nivell",
+    "comingSoon": "Pròximament!",
+    "comingSoonMsg": "Aquest joc s'està creant amb estima. Torna aviat!",
+    "backToCategories": "Tornar a Categories"
+  }
+}

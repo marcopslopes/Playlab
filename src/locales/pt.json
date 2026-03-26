@@ -1,0 +1,123 @@
+{
+  "onboarding": {
+    "tapToStart": "TOCA PARA COMEÇAR",
+    "startingUp": "A iniciar...",
+    "tapAColor": "TOCA NUMA COR! 🎨",
+    "colors": {
+      "red": "VERMELHO",
+      "blue": "AZUL",
+      "green": "VERDE",
+      "yellow": "AMARELO"
+    },
+    "findLetterTitle": "ENCONTRA A LETRA M! ⌨️",
+    "findLetterHint": "Olha para o teclado e carrega na tecla M",
+    "foundIt": "ENCONTRASTE! ✨",
+    "findNumberTitle": "ENCONTRA O NÚMERO 5! 🔢",
+    "findNumberHint": "Olha para o teclado e carrega na tecla 5",
+    "awesome": "FANTÁSTICO! ⭐",
+    "didIt": "✨ CONSEGUISTE! ✨",
+    "knowKeyboard": "Já conheces o teclado!",
+    "startLearning": "COMEÇAR A APRENDER! 🚀"
+  },
+  "companion": {
+    "chooseTitle": "Escolhe o Teu Amigo",
+    "chooseSubtitle": "Quem vai aprender contigo hoje?",
+    "selectButton": "Escolher Este Amigo!",
+    "companions": {
+      "owl": { "name": "CORUJA SÁBIA", "personality": "Calma e Pensativa" },
+      "bunny": { "name": "COELHO FELIZ", "personality": "Gentil e Brincalhão" },
+      "fox": { "name": "RAPOSA ESPERTA", "personality": "Inteligente e Amigável" },
+      "bear": { "name": "URSO SIMPÁTICO", "personality": "Caloroso e Carinhoso" },
+      "cat": { "name": "GATO DOCE", "personality": "Curioso e Acolhedor" },
+      "dog": { "name": "CÃO LEAL", "personality": "Alegre e Corajoso" }
+    },
+    "messages": [
+      "Estás a fazer muito bem!",
+      "Vamos aprender juntos!",
+      "Tenho muito orgulho em ti!",
+      "Pronto para a diversão?"
+    ]
+  },
+  "daily": {
+    "greetingMorning": "Bom Dia",
+    "greetingAfternoon": "Boa Tarde",
+    "greetingEvening": "Boa Noite",
+    "readyForPractice": "Pronto para a prática de hoje?",
+    "startPractice": "Começar Prática",
+    "starsEarned": "Estrelas Ganhas",
+    "dayStreak": "Dias Seguidos",
+    "completed": "Concluídos"
+  },
+  "categories": {
+    "title": "Escolhe a Tua Prática",
+    "subtitle": "O que queres trabalhar hoje?",
+    "startPractice": "Começar Prática",
+    "comingSoon": "Em Breve",
+    "items": {
+      "logic": { "title": "Lógica", "description": "Padrões e puzzles" },
+      "memory": { "title": "Memória", "description": "Lembra e combina" },
+      "focus": { "title": "Foco", "description": "Mantém-te atento!" },
+      "words": { "title": "Palavras", "description": "Letras e histórias" },
+      "math": { "title": "Matemática", "description": "Números e contagem" },
+      "colors": { "title": "Cores", "description": "Mistura e combina" },
+      "shapes": { "title": "Formas", "description": "Roda e combina" },
+      "creative": { "title": "Criativo", "description": "Desenha e imagina" },
+      "music": { "title": "Música", "description": "Sons e ritmos" },
+      "languages": { "title": "Línguas", "description": "Aprende novas palavras" }
+    }
+  },
+  "nav": {
+    "back": "Voltar",
+    "home": "Início",
+    "garden": "Jardim",
+    "dashboard": "Painel",
+    "settings": "Definições",
+    "restart": "Reiniciar"
+  },
+  "settings": {
+    "title": "Definições ⚙️",
+    "theme": "Tema",
+    "light": "☀️ Claro",
+    "dark": "🌙 Escuro",
+    "language": "Idioma",
+    "childAge": "Idade da Criança",
+    "ageLabel": "Idade: {age} anos",
+    "autoSave": "As definições são guardadas automaticamente e aplicam-se a toda a experiência.",
+    "languages": {
+      "en": "🇬🇧 English",
+      "pt": "🇵🇹 Português",
+      "es": "🇪🇸 Español",
+      "ca": "🏴 Català"
+    }
+  },
+  "achievements": {
+    "unlocked": "Conquista Desbloqueada!",
+    "tapToContinue": "Toca para continuar"
+  },
+  "garden": {
+    "title": "O Teu Jardim",
+    "subtitle": "Cada flor desabrocha enquanto aprendes",
+    "back": "Voltar"
+  },
+  "dashboard": {
+    "title": "Painel dos Pais",
+    "progress": "Progresso",
+    "achievements": "Conquistas",
+    "totalSessions": "Total de Sessões",
+    "totalStars": "Total de Estrelas",
+    "currentStreak": "Sequência Atual",
+    "back": "Voltar"
+  },
+  "games": {
+    "back": "Voltar",
+    "correct": "Correto! 🎉",
+    "tryAgain": "Tenta Outra Vez!",
+    "wellDone": "Muito Bem! ⭐",
+    "amazing": "Incrível! 🌟",
+    "score": "Pontuação",
+    "level": "Nível",
+    "comingSoon": "Em Breve!",
+    "comingSoonMsg": "Este jogo está a ser criado com carinho. Volta em breve!",
+    "backToCategories": "Voltar às Categorias"
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "onboarding": {
+    "tapToStart": "TAP TO START",
+    "startingUp": "Starting up...",
+    "tapAColor": "TAP A COLOR! 🎨",
+    "colors": {
+      "red": "RED",
+      "blue": "BLUE",
+      "green": "GREEN",
+      "yellow": "YELLOW"
+    },
+    "findLetterTitle": "FIND THE LETTER M! ⌨️",
+    "findLetterHint": "Look at your keyboard and press the M key",
+    "foundIt": "YOU FOUND IT! ✨",
+    "findNumberTitle": "FIND THE NUMBER 5! 🔢",
+    "findNumberHint": "Look at your keyboard and press the 5 key",
+    "awesome": "AWESOME! ⭐",
+    "didIt": "✨ YOU DID IT! ✨",
+    "knowKeyboard": "You know your keyboard!",
+    "startLearning": "START LEARNING! 🚀"
+  },
+  "companion": {
+    "chooseTitle": "Choose Your Friend",
+    "chooseSubtitle": "Who will learn with you today?",
+    "selectButton": "Choose This Friend!",
+    "companions": {
+      "owl": { "name": "WISE OWL", "personality": "Calm & Thoughtful" },
+      "bunny": { "name": "HAPPY BUNNY", "personality": "Gentle & Playful" },
+      "fox": { "name": "CLEVER FOX", "personality": "Smart & Friendly" },
+      "bear": { "name": "KIND BEAR", "personality": "Warm & Caring" },
+      "cat": { "name": "SWEET CAT", "personality": "Curious & Cozy" },
+      "dog": { "name": "LOYAL DOG", "personality": "Happy & Brave" }
+    },
+    "messages": [
+      "You're doing great!",
+      "Let's learn together!",
+      "I'm so proud of you!",
+      "Ready for fun?"
+    ]
+  },
+  "daily": {
+    "greetingMorning": "Good Morning",
+    "greetingAfternoon": "Good Afternoon",
+    "greetingEvening": "Good Evening",
+    "readyForPractice": "Ready for today's practice?",
+    "startPractice": "Start Practice",
+    "starsEarned": "Stars Earned",
+    "dayStreak": "Day Streak",
+    "completed": "Completed"
+  },
+  "categories": {
+    "title": "Choose Your Practice",
+    "subtitle": "What would you like to work on today?",
+    "startPractice": "Start Practice",
+    "comingSoon": "Coming Soon",
+    "items": {
+      "logic": { "title": "Logic", "description": "Patterns & puzzles" },
+      "memory": { "title": "Memory", "description": "Remember & match" },
+      "focus": { "title": "Focus", "description": "Stay sharp!" },
+      "words": { "title": "Words", "description": "Letters & stories" },
+      "math": { "title": "Math", "description": "Numbers & counting" },
+      "colors": { "title": "Colors", "description": "Mix & match hues" },
+      "shapes": { "title": "Shapes", "description": "Rotate & match" },
+      "creative": { "title": "Creative", "description": "Draw & imagine" },
+      "music": { "title": "Music", "description": "Sounds & rhythms" },
+      "languages": { "title": "Languages", "description": "Learn new words" }
+    }
+  },
+  "nav": {
+    "back": "Back",
+    "home": "Home",
+    "garden": "Garden",
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "restart": "Restart"
+  },
+  "settings": {
+    "title": "Settings ⚙️",
+    "theme": "Theme",
+    "light": "☀️ Light",
+    "dark": "🌙 Dark",
+    "language": "Language",
+    "childAge": "Child's Age",
+    "ageLabel": "Age: {age} years old",
+    "autoSave": "Settings are saved automatically and apply to the entire app experience.",
+    "languages": {
+      "en": "🇬🇧 English",
+      "pt": "🇵🇹 Português",
+      "es": "🇪🇸 Español",
+      "ca": "🏴 Català"
+    }
+  },
+  "achievements": {
+    "unlocked": "Achievement Unlocked!",
+    "tapToContinue": "Tap to continue"
+  },
+  "garden": {
+    "title": "Your Garden",
+    "subtitle": "Each flower blooms as you learn",
+    "back": "Back"
+  },
+  "dashboard": {
+    "title": "Parent Dashboard",
+    "progress": "Progress",
+    "achievements": "Achievements",
+    "totalSessions": "Total Sessions",
+    "totalStars": "Total Stars",
+    "currentStreak": "Current Streak",
+    "back": "Back"
+  },
+  "games": {
+    "back": "Back",
+    "correct": "Correct! 🎉",
+    "tryAgain": "Try Again!",
+    "wellDone": "Well Done! ⭐",
+    "amazing": "Amazing! 🌟",
+    "score": "Score",
+    "level": "Level",
+    "comingSoon": "Coming Soon!",
+    "comingSoonMsg": "This game is being created with love. Check back soon!",
+    "backToCategories": "Back to Categories"
+  }
+}
