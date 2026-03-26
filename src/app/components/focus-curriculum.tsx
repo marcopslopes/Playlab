@@ -64,7 +64,7 @@ export function FocusCurriculum() {
     if (locked) {
       return;
     }
-    navigate(`/game/focus/${courseId}/${gameId}`);
+    navigate(`/game/${gameId}`);
   };
 
   return (

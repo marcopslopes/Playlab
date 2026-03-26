@@ -63,7 +63,7 @@ export function WordsCurriculum() {
     if (locked) {
       return;
     }
-    navigate(`/game/words/${courseId}/${gameId}`);
+    navigate(`/game/${gameId}`);
   };
 
   return (

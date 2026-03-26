@@ -64,7 +64,7 @@ export function MemoryCurriculum() {
     if (locked) {
       return;
     }
-    navigate(`/game/memory/${courseId}/${gameId}`);
+    navigate(`/game/${gameId}`);
   };
 
   return (

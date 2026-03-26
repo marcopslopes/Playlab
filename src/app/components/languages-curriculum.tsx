@@ -86,7 +86,7 @@ export function LanguagesCurriculum() {
     if (locked) {
       return;
     }
-    navigate(`/game/languages/${courseId}/${gameId}`);
+    navigate(`/game/${gameId}`);
   };
 
   return (

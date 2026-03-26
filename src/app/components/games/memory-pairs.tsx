@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { ArrowLeft, Star } from 'lucide-react';
 import { useGameProgress } from '../../hooks/use-game-progress';
 import { useTranslation } from '../../hooks/use-translation';

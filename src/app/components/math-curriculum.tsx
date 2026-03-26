@@ -79,7 +79,7 @@ export function MathCurriculum() {
     if (locked) {
       return;
     }
-    navigate(`/game/math/${courseId}/${gameId}`);
+    navigate(`/game/${gameId}`);
   };
 
   return (

@@ -150,7 +150,7 @@ export function LogicCurriculum() {
     if (locked) {
       return;
     }
-    navigate(`/game/logic/${courseId}/${gameId}`);
+    navigate(`/game/${gameId}`);
   };
 
   return (

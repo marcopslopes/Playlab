@@ -64,7 +64,7 @@ export function ColorsCurriculum() {
     if (locked) {
       return;
     }
-    navigate(`/game/colors/${courseId}/${gameId}`);
+    navigate(`/game/${gameId}`);
   };
 
   return (

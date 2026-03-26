@@ -63,7 +63,7 @@ export function ShapesCurriculum() {
     if (locked) {
       return;
     }
-    navigate(`/game/shapes/${courseId}/${gameId}`);
+    navigate(`/game/${gameId}`);
   };
 
   return (
