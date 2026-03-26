@@ -71,6 +71,98 @@ export default defineConfig(({ mode }) => {
           })
         },
       },
+
+      // Dev-only: serve /api/speak locally (GPT-4o-mini → TTS)
+      {
+        name: 'speak-dev',
+        configureServer(server) {
+          server.middlewares.use('/api/speak', async (req, res) => {
+            console.log('[speak dev] request received, method:', req.method)
+
+            if (req.method !== 'POST') {
+              res.writeHead(405); res.end('Method not allowed'); return
+            }
+
+            const apiKey = env.OPENAI_API_KEY
+            if (!apiKey) {
+              console.error('[speak dev] OPENAI_API_KEY not found in .env.local')
+              res.writeHead(503); res.end('Not configured'); return
+            }
+
+            let body = ''
+            req.on('data', (chunk) => { body += chunk.toString() })
+            req.on('end', async () => {
+              try {
+                const parsed = JSON.parse(body) as {
+                  childName?: string; companionName?: string; companionPersonality?: string
+                  language?: string; timeOfDay?: string; stars?: number; streak?: number
+                }
+                const childName = parsed.childName?.trim().slice(0, 30) || 'Explorer'
+                const companionName = parsed.companionName?.trim().slice(0, 30) || 'friend'
+                const companionPersonality = parsed.companionPersonality?.trim().slice(0, 50) || 'friendly'
+                const language = parsed.language || 'en'
+                const timeOfDay = parsed.timeOfDay || 'morning'
+                const stars = parsed.stars ?? 0
+                const streak = parsed.streak ?? 0
+                const isPT = language === 'pt'
+
+                const systemPrompt = isPT
+                  ? 'És um assistente simpático para crianças. Fala em Português de Portugal (não Brasileiro). Responde apenas com a saudação — sem aspas, sem explicações.'
+                  : 'You are a warm, encouraging assistant for young children. Respond with only the greeting — no quotes, no explanations.'
+
+                const userPrompt = isPT
+                  ? `Cria uma saudação de boas-vindas de uma frase para ${childName}. A hora é ${timeOfDay === 'morning' ? 'manhã' : timeOfDay === 'afternoon' ? 'tarde' : 'noite'}. O seu companheiro chama-se ${companionName} (${companionPersonality}). Tem ${stars} estrelas e ${streak} dias seguidos. Menciona o nome e algo encorajador. Máximo 30 palavras.`
+                  : `Create a warm one-sentence welcome greeting for ${childName}. It is ${timeOfDay}. Their companion is ${companionName} (${companionPersonality}). They have ${stars} stars and a ${streak}-day streak. Mention their name and something encouraging. Max 25 words.`
+
+                console.log('[speak dev] generating greeting for:', childName, '| lang:', language)
+
+                const { default: OpenAI } = await import('openai')
+                const openai = new OpenAI({ apiKey })
+
+                const chat = await openai.chat.completions.create({
+                  model: 'gpt-4o-mini',
+                  messages: [
+                    { role: 'system', content: systemPrompt },
+                    { role: 'user', content: userPrompt },
+                  ],
+                  max_tokens: 80,
+                  temperature: 0.8,
+                })
+
+                const greetingText = (chat.choices[0]?.message?.content ?? '').trim().slice(0, 200)
+                if (!greetingText) {
+                  res.writeHead(502); res.end('No greeting generated'); return
+                }
+
+                console.log('[speak dev] greeting text:', greetingText)
+
+                const PT_TTS_INSTRUCTIONS =
+                  'Speak in European Portuguese (Portugal) accent — not Brazilian. ' +
+                  'Clear, warm, and friendly for young children.'
+
+                const ttsResponse = await openai.audio.speech.create({
+                  model: isPT ? 'gpt-4o-mini-tts' : 'tts-1',
+                  voice: 'nova',
+                  input: greetingText,
+                  response_format: 'mp3',
+                  ...(isPT ? { instructions: PT_TTS_INSTRUCTIONS } : {}),
+                } as any)
+
+                const buffer = Buffer.from(await ttsResponse.arrayBuffer())
+                res.writeHead(200, {
+                  'Content-Type': 'audio/mpeg',
+                  'Cache-Control': 'no-store',
+                })
+                res.end(buffer)
+                console.log('[speak dev] audio sent, bytes:', buffer.length)
+              } catch (err) {
+                console.error('[speak dev] error:', err)
+                res.writeHead(502); res.end('Generation failed')
+              }
+            })
+          })
+        },
+      },
     ],
 
     resolve: {
