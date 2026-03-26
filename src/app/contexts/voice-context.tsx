@@ -128,12 +128,7 @@ export function VoiceProvider({ children }: { children: ReactNode }) {
         return
       }
 
-      // Start Web Speech IMMEDIATELY (before any await) so the browser's
-      // user-gesture requirement is met. If OpenAI TTS succeeds later,
-      // we cancel this and play the higher-quality audio instead.
-      speakWebSpeech(trimmed, volume, speed, language)
-
-      // Try to upgrade to OpenAI TTS in the background
+      // Try OpenAI TTS via /api/tts (works in both dev via Vite middleware and production via Vercel)
       try {
         const res = await fetch('/api/tts', {
           method: 'POST',
@@ -142,7 +137,10 @@ export function VoiceProvider({ children }: { children: ReactNode }) {
         })
 
         const contentType = res.headers.get('content-type') || ''
-        if (!res.ok || !contentType.includes('audio')) return // Web Speech already playing — leave it
+        if (!res.ok || !contentType.includes('audio')) {
+          speakWebSpeech(trimmed, volume, speed, language)
+          return
+        }
 
         const blob = await res.blob()
         const url = URL.createObjectURL(blob)
@@ -154,11 +152,10 @@ export function VoiceProvider({ children }: { children: ReactNode }) {
             audioCache.delete(firstKey)
           }
         }
-        // Replace Web Speech with the higher-quality OpenAI audio
-        stopCurrentAudio()
         playBlobUrl(url, volume, speed)
       } catch {
-        // Network error — Web Speech is already playing, nothing to do
+        // Network error — fall back to Web Speech
+        speakWebSpeech(trimmed, volume, speed, language)
       }
     },
     [muted, volume, speed, language]
