@@ -5,6 +5,7 @@ import { OutdoorBackground } from './outdoor-background';
 import { CompanionHelper } from './companion-helper';
 import { useSettings } from '../contexts/settings-context';
 import { useProgress } from '../contexts/progress-context';
+import { useTranslation } from '../hooks/use-translation';
 
 // Flower types with their colors and meanings
 const FLOWER_TYPES = {
@@ -33,6 +34,7 @@ export function Garden() {
   const navigate = useNavigate();
   const { theme } = useSettings();
   const { getTotalStars, getFlowersEarned } = useProgress();
+  const { t } = useTranslation();
 
   // Get real progress data
   const totalStarsEarned = getTotalStars();
@@ -105,7 +107,7 @@ export function Garden() {
             style={{ color: theme === 'dark' ? '#E4DCCF' : '#6b7280' }}
           >
             <ArrowLeft className="w-5 h-5" />
-            <span style={{ fontSize: '0.9375rem' }}>Back</span>
+            <span style={{ fontSize: '0.9375rem' }}>{t('garden.back')}</span>
           </button>
 
           <div className="flex items-center gap-3">
@@ -118,7 +120,7 @@ export function Garden() {
                 color: theme === 'dark' ? '#E4DCCF' : '#1F2023',
               }}
             >
-              MY GARDEN
+              {t('garden.title')}
             </h1>
             <Sparkles className="w-6 h-6" style={{ color: '#7D9D9C' }} />
           </div>

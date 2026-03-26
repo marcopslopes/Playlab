@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { ArrowLeft, Star } from 'lucide-react';
 import { OutdoorBackground } from '../outdoor-background';
 import { CompanionHelper, useCompanionMessage } from '../companion-helper';
 import { useSettings } from '../../contexts/settings-context';
+import { useTranslation } from '../../hooks/use-translation';
 import { useGameProgress } from '../../hooks/use-game-progress';
 import { getRoundsForLevel } from '../../utils/game-config';
 
@@ -22,6 +23,7 @@ const rhythmPatterns = [
 export function RhythmMatch() {
   const navigate = useNavigate();
   const { theme } = useSettings();
+  const { t } = useTranslation();
   const { completeGame } = useGameProgress({ 
     gameId: 'music/intermediate/rhythm-match', 
     categoryId: 'music' 
@@ -37,6 +39,7 @@ export function RhythmMatch() {
   const [mistakes, setMistakes] = useState(0);
   const [isRecording, setIsRecording] = useState(false);
   const [recordingBeat, setRecordingBeat] = useState(0);
+  const recordingIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const totalRounds = getRoundsForLevel('intermediate'); // Intermediate course = 4 rounds
   const { message, celebrate, encourage } = useCompanionMessage();
 
@@ -77,10 +80,13 @@ export function RhythmMatch() {
     setRecordingBeat(0);
     
     // Auto-advance through beats
-    const interval = setInterval(() => {
+    recordingIntervalRef.current = setInterval(() => {
       setRecordingBeat(prev => {
         if (prev >= targetRhythm.pattern.length - 1) {
-          clearInterval(interval);
+          if (recordingIntervalRef.current) {
+            clearInterval(recordingIntervalRef.current);
+            recordingIntervalRef.current = null;
+          }
           setIsRecording(false);
           return prev;
         }
@@ -122,7 +128,7 @@ export function RhythmMatch() {
           if (currentRound + 1 < totalRounds) {
             setCurrentRound(currentRound + 1);
           } else {
-            completeGame(stars);
+            completeGame(mistakes, stars);
             setTimeout(() => navigate('/game/music'), 500);
           }
         }, 1500);
@@ -138,6 +144,11 @@ export function RhythmMatch() {
       }
     }
   }, [isRecording]);
+
+  // Cleanup interval on unmount
+  useEffect(() => () => {
+    if (recordingIntervalRef.current) clearInterval(recordingIntervalRef.current);
+  }, []);
 
   if (!targetRhythm) return null;
 
@@ -158,7 +169,7 @@ export function RhythmMatch() {
             }}
           >
             <ArrowLeft className="w-5 h-5" />
-            <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600 }}>Back</span>
+            <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600 }}>{t('games.back')}</span>
           </Link>
 
           <div className="flex items-center gap-1">
@@ -425,7 +436,7 @@ export function RhythmMatch() {
                       color: theme === 'dark' ? '#E4DCCF' : '#1F2023',
                     }}
                   >
-                    Try Again
+                    {t('games.tryAgain')}
                   </h2>
                   <p style={{ color: theme === 'dark' ? 'rgba(228, 220, 207, 0.7)' : '#6b7280', fontSize: '1.0625rem' }}>
                     Listen carefully and feel the rhythm!

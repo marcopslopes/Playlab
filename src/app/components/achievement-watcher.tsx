@@ -14,7 +14,15 @@ export function AchievementWatcher({ children }: { children: ReactNode }) {
   const { progress } = useProgress();
   const [queuedAchievements, setQueuedAchievements] = useState<Achievement[]>([]);
   const [currentAchievement, setCurrentAchievement] = useState<Achievement | null>(null);
-  const [lastAchievementCount, setLastAchievementCount] = useState(0);
+  // Initialise from localStorage so the jump from [] → stored achievements on first render
+  // is not treated as new achievements to celebrate.
+  const [lastAchievementCount, setLastAchievementCount] = useState(() => {
+    try {
+      const saved = localStorage.getItem('cognitiveCalm_progress');
+      if (saved) return (JSON.parse(saved).achievements?.length ?? 0);
+    } catch {}
+    return 0;
+  });
 
   // Watch for new achievements
   useEffect(() => {

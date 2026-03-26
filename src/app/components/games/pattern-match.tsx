@@ -4,6 +4,7 @@ import { ArrowLeft, Check, X, Star } from 'lucide-react';
 import { OutdoorBackground } from '../outdoor-background';
 import { CompanionHelper, useCompanionMessage } from '../companion-helper';
 import { useSettings } from '../../contexts/settings-context';
+import { useTranslation } from '../../hooks/use-translation';
 import { useProgress } from '../../contexts/progress-context';
 import { getRoundsForLevel } from '../../utils/game-config';
 
@@ -28,6 +29,7 @@ const colorMap: Record<string, string> = {
 export function PatternMatch() {
   const navigate = useNavigate();
   const { theme } = useSettings();
+  const { t } = useTranslation();
   const { updateGameProgress } = useProgress();
   const [currentRound, setCurrentRound] = useState(0);
   const [targetPattern, setTargetPattern] = useState<typeof patterns[0] | null>(null);
@@ -169,18 +171,18 @@ export function PatternMatch() {
             style={{ color: theme === 'dark' ? '#E4DCCF' : '#6b7280' }}
           >
             <ArrowLeft className="w-5 h-5" />
-            <span style={{ fontSize: '0.9375rem' }}>Back</span>
+            <span style={{ fontSize: '0.9375rem' }}>{t('games.back')}</span>
           </Link>
-          
+
           <div className="flex items-center gap-8">
             {/* Round Counter */}
             <div className="text-center">
-              <p 
-                className="mb-1" 
-                style={{ 
-                  fontSize: '0.75rem', 
-                  fontWeight: 500, 
-                  textTransform: 'uppercase', 
+              <p
+                className="mb-1"
+                style={{
+                  fontSize: '0.75rem',
+                  fontWeight: 500,
+                  textTransform: 'uppercase',
                   letterSpacing: '0.05em',
                   color: theme === 'dark' ? 'rgba(228, 220, 207, 0.6)' : '#9ca3af',
                 }}
@@ -211,7 +213,7 @@ export function PatternMatch() {
                   color: theme === 'dark' ? 'rgba(228, 220, 207, 0.6)' : '#9ca3af',
                 }}
               >
-                Your Score
+                {t('games.score')}
               </p>
               <div className="flex gap-1.5">
                 {[1, 2, 3].map((star) => (
@@ -384,7 +386,7 @@ export function PatternMatch() {
                     marginBottom: '2rem',
                   }}
                 >
-                  {isCorrect ? '✨ GREAT! ✨' : '❤️ TRY AGAIN ❤️'}
+                  {isCorrect ? t('games.correct') : t('games.tryAgain')}
                 </h2>
                 
                 {/* Continue Button */}

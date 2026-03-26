@@ -1,4 +1,5 @@
 import { CategoryScreen } from './category-screen';
+import { CompanionHelper } from './companion-helper';
 
 const musicCourses = [
   {
@@ -119,13 +120,16 @@ const musicCourses = [
 
 export function MusicCurriculum() {
   return (
-    <CategoryScreen
-      categoryId="music"
-      categoryName="Music"
-      categoryEmoji="🎵"
-      categoryColor="#9B59B6" // Purple color for music
-      courses={musicCourses}
-      description="Explore sounds, rhythms, and melodies through playful musical activities"
-    />
+    <div>
+      <CompanionHelper />
+      <CategoryScreen
+        categoryId="music"
+        categoryName="Music"
+        categoryEmoji="🎵"
+        categoryColor="#9B59B6" // Purple color for music
+        courses={musicCourses}
+        description="Explore sounds, rhythms, and melodies through playful musical activities"
+      />
+    </div>
   );
 }

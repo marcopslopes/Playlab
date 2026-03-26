@@ -1,7 +1,7 @@
-import en from '../../../locales/en.json';
-import pt from '../../../locales/pt.json';
-import es from '../../../locales/es.json';
-import ca from '../../../locales/ca.json';
+import en from '../../locales/en.json';
+import pt from '../../locales/pt.json';
+import es from '../../locales/es.json';
+import ca from '../../locales/ca.json';
 import { useSettings } from '../contexts/settings-context';
 
 type Language = 'en' | 'pt' | 'es' | 'ca';

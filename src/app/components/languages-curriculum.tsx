@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router';
 import { ArrowLeft, Languages, Lock, Star, Trophy, CheckCircle2, Volume2 } from 'lucide-react';
 import { useSettings } from '../contexts/settings-context';
 import { OutdoorBackground } from './outdoor-background';
+import { CompanionHelper } from './companion-helper';
 
 interface Course {
   id: string;
@@ -86,7 +87,7 @@ export function LanguagesCurriculum() {
     if (locked) {
       return;
     }
-    navigate(`/game/languages/${courseId}/${gameId}`);
+    navigate(`/game/${gameId}`);
   };
 
   return (
@@ -98,6 +99,7 @@ export function LanguagesCurriculum() {
         color: theme === 'dark' ? '#E4DCCF' : '#1F2023',
       }}
     >
+      <CompanionHelper />
       <OutdoorBackground />
       
       <div className="max-w-5xl mx-auto relative z-10">

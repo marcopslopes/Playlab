@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { ArrowLeft, Star } from 'lucide-react';
 import { useGameProgress } from '../../hooks/use-game-progress';
+import { useTranslation } from '../../hooks/use-translation';
 
 const colors = ['#7D9D9C', '#C08B7E', '#7C8B95', '#FDB022'];
 
@@ -15,6 +16,7 @@ interface Bubble {
 
 export function FocusTap() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { completeGame } = useGameProgress({ 
     gameId: 'focus/beginner/focus-tap', 
     categoryId: 'focus' 
@@ -120,7 +122,7 @@ export function FocusTap() {
             className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 transition-colors mb-6"
           >
             <ArrowLeft className="w-5 h-5" />
-            <span style={{ fontSize: '0.9375rem' }}>BACK</span>
+            <span style={{ fontSize: '0.9375rem' }}>{t('games.back')}</span>
           </Link>
 
           <div className="flex items-center justify-between mb-6">
@@ -225,16 +227,16 @@ export function FocusTap() {
             </div>
           </>
         ) : (
-          <div 
+          <div
             className="fixed inset-0 flex items-center justify-center z-50"
             style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
           >
-            <div 
+            <div
               className="bg-white rounded-3xl p-12 text-center max-w-md mx-4"
               style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)' }}
             >
-              <p 
-                style={{ 
+              <p
+                style={{
                   fontFamily: 'var(--font-display)',
                   fontSize: '3rem',
                   fontWeight: 700,
@@ -244,17 +246,57 @@ export function FocusTap() {
               >
                 🎯 GREAT FOCUS! 🎯
               </p>
-              
-              <p 
+
+              <p
                 className="mt-4"
-                style={{ 
+                style={{
                   fontFamily: 'var(--font-body)',
                   fontSize: '1.25rem',
                   color: '#7C8B95',
                 }}
               >
-                Score: {score}
+                {t('games.score')}: {score}
               </p>
+
+              <div className="flex justify-center gap-2 mt-6">
+                {[1, 2, 3].map((star) => (
+                  <Star
+                    key={star}
+                    className="w-10 h-10"
+                    style={{
+                      color: star <= stars ? '#FDB022' : '#e5e7eb',
+                      fill: star <= stars ? '#FDB022' : 'none',
+                    }}
+                  />
+                ))}
+              </div>
+
+              <p
+                className="mt-4"
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '1.125rem',
+                  color: '#7D9D9C',
+                  fontWeight: 600,
+                }}
+              >
+                {t('games.wellDone')}
+              </p>
+
+              <button
+                onClick={() => navigate('/categories')}
+                className="mt-8 px-8 py-4 rounded-3xl text-white transition-all hover:scale-105 active:scale-95"
+                style={{
+                  backgroundColor: '#7D9D9C',
+                  fontFamily: 'var(--font-display)',
+                  fontSize: '1rem',
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  boxShadow: '0 4px 16px rgba(125, 157, 156, 0.4)',
+                }}
+              >
+                {t('games.back')}
+              </button>
             </div>
           </div>
         )}

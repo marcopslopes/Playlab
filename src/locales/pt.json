@@ -83,6 +83,18 @@
     "childAge": "Idade da Criança",
     "ageLabel": "Idade: {age} anos",
     "autoSave": "As definições são guardadas automaticamente e aplicam-se a toda a experiência.",
+    "childName": "Nome da Criança",
+    "voice": "Voz",
+    "voiceOn": "Voz Ligada",
+    "voiceOff": "Voz Desligada",
+    "volume": "Volume",
+    "volumeQuiet": "Baixo",
+    "volumeNormal": "Normal",
+    "volumeLoud": "Alto",
+    "speechSpeed": "Velocidade",
+    "speedSlow": "Lento",
+    "speedNormal": "Normal",
+    "speedFast": "Rápido",
     "languages": {
       "en": "🇬🇧 English",
       "pt": "🇵🇹 Português",
@@ -119,5 +131,210 @@
     "comingSoon": "Em Breve!",
     "comingSoonMsg": "Este jogo está a ser criado com carinho. Volta em breve!",
     "backToCategories": "Voltar às Categorias"
+  },
+  "curriculum": {
+    "backToPractice": "Voltar à Prática",
+    "chooseACourse": "Escolhe um curso para começar",
+    "clickToPlay": "Clica num jogo para jogar",
+    "progress": "Progresso",
+    "completePrevious": "Completa o curso anterior para desbloquear",
+    "logic": {
+      "title": "Logic Courses",
+      "subtitle": "Train your thinking",
+      "courses": {
+        "beginner": { "title": "Pattern Explorers", "ageRange": "Ages 3-5", "description": "Learn colors, shapes, and simple patterns" },
+        "intermediate": { "title": "Logic Builders", "ageRange": "Ages 5-7", "description": "Discover rules and solve puzzles" },
+        "advanced": { "title": "Puzzle Masters", "ageRange": "Ages 7-9", "description": "Master tricky puzzles and challenges" }
+      },
+      "games": {
+        "pattern-match": { "title": "Pattern Match", "type": "Match the patterns" },
+        "color-sort": { "title": "Color Fun", "type": "Sort by color" },
+        "memory-match": { "title": "Memory Match", "type": "Find the pairs" },
+        "number-counting": { "title": "Count 1-2-3", "type": "Tap numbers in order" },
+        "shape-find": { "title": "Shape Hunt", "type": "Find matching shapes" },
+        "size-order": { "title": "Size It Up", "type": "Big to small" },
+        "sequence-next": { "title": "What's Next?", "type": "Predict sequences" },
+        "rule-finder": { "title": "Rule Detective", "type": "Find the rule" },
+        "category-sort": { "title": "Sort & Match", "type": "Group by type" },
+        "odd-one-out": { "title": "Odd One Out", "type": "Find the different one" },
+        "pattern-create": { "title": "Make Patterns", "type": "Create your own" },
+        "multi-pattern": { "title": "Super Patterns", "type": "Multiple rules" },
+        "logic-grid": { "title": "Grid Master", "type": "Solve the grid" },
+        "analogy": { "title": "Brain Teasers", "type": "Find connections" },
+        "deduction": { "title": "Super Detective", "type": "Use clues" },
+        "transformation": { "title": "Shape Shifter", "type": "Rotate & flip" }
+      }
+    },
+    "math": {
+      "title": "Math Courses",
+      "subtitle": "Count, add, and solve with confidence!",
+      "courses": {
+        "beginner": { "title": "Number Friends", "ageRange": "Ages 3-5", "description": "Count and recognize numbers" },
+        "intermediate": { "title": "Math Wizards", "ageRange": "Ages 5-7", "description": "Add and subtract with fun" },
+        "advanced": { "title": "Number Ninjas", "ageRange": "Ages 7-9", "description": "Master multiplication basics" }
+      },
+      "games": {
+        "count-tap": { "title": "Tap & Count", "type": "Count objects" },
+        "number-match": { "title": "Number Match", "type": "Match numbers" },
+        "more-less": { "title": "More or Less?", "type": "Compare amounts" },
+        "math-fun": { "title": "Math Fun", "type": "Simple addition" },
+        "subtract-stars": { "title": "Take Away", "type": "Subtraction time" },
+        "number-story": { "title": "Story Problems", "type": "Word problems" },
+        "times-table": { "title": "Times 2 & 5", "type": "Easy multiplication" },
+        "skip-count": { "title": "Skip Counting", "type": "Count by 2s, 5s, 10s" }
+      }
+    },
+    "memory": {
+      "title": "Memory Courses",
+      "subtitle": "Train your brain to remember more!",
+      "courses": {
+        "beginner": { "title": "Memory Starters", "ageRange": "Ages 3-5", "description": "Remember simple things" },
+        "intermediate": { "title": "Memory Champions", "ageRange": "Ages 5-7", "description": "Remember more at once" }
+      },
+      "games": {
+        "memory-pairs": { "title": "Animal Pairs", "type": "Match the pairs" },
+        "whats-missing": { "title": "What's Missing?", "type": "Find the missing item" },
+        "sequence-repeat": { "title": "Copy Me!", "type": "Repeat the sequence" },
+        "grid-memory": { "title": "Grid Master", "type": "Remember positions" },
+        "number-chain": { "title": "Number Chain", "type": "Remember numbers" }
+      }
+    },
+    "colors": {
+      "title": "Colors Courses",
+      "subtitle": "Learn, mix, and master colors!",
+      "courses": {
+        "beginner": { "title": "Color Explorers", "ageRange": "Ages 3-5", "description": "Learn basic colors and matching" },
+        "intermediate": { "title": "Color Mixers", "ageRange": "Ages 5-7", "description": "Mix and create new colors" }
+      },
+      "games": {
+        "color-match": { "title": "Color Match", "type": "Match the colors" },
+        "rainbow-sort": { "title": "Rainbow Sort", "type": "Sort by rainbow" },
+        "shade-finder": { "title": "Same or Different?", "type": "Find matching shades" },
+        "color-blend": { "title": "Mix It Up", "type": "Blend colors" },
+        "palette-match": { "title": "Palette Master", "type": "Match color groups" }
+      }
+    },
+    "shapes": {
+      "title": "Shapes Courses",
+      "subtitle": "Explore circles, squares, and more!",
+      "courses": {
+        "beginner": { "title": "Shape Seekers", "ageRange": "Ages 3-5", "description": "Learn circles, squares, triangles" },
+        "intermediate": { "title": "Geometry Kids", "ageRange": "Ages 5-7", "description": "Learn more complex shapes" }
+      },
+      "games": {
+        "shapes-rotate": { "title": "Shape Spin", "type": "Rotate to match" },
+        "shape-build": { "title": "Build It!", "type": "Make pictures with shapes" },
+        "shape-match": { "title": "3D Shapes", "type": "Match 3D objects" },
+        "symmetry": { "title": "Mirror Match", "type": "Find symmetry" }
+      }
+    },
+    "focus": {
+      "title": "Focus Courses",
+      "subtitle": "Sharpen your attention and concentration!",
+      "courses": {
+        "beginner": { "title": "Focus Finders", "ageRange": "Ages 3-5", "description": "Learn to pay attention" },
+        "intermediate": { "title": "Attention Masters", "ageRange": "Ages 5-7", "description": "Stay focused longer" }
+      },
+      "games": {
+        "focus-tap": { "title": "Color Tap", "type": "Tap only one color" },
+        "spot-difference": { "title": "Spot the Difference", "type": "Find what changed" },
+        "follow-light": { "title": "Follow the Light", "type": "Track the moving dot" },
+        "multi-task": { "title": "Two Things!", "type": "Do two tasks at once" },
+        "reaction-time": { "title": "Quick Hands", "type": "React fast!" }
+      }
+    },
+    "words": {
+      "title": "Words Courses",
+      "subtitle": "Explore letters, sounds, and words!",
+      "courses": {
+        "beginner": { "title": "Letter Friends", "ageRange": "Ages 3-5", "description": "Learn letters and sounds" },
+        "intermediate": { "title": "Word Builders", "ageRange": "Ages 5-7", "description": "Build simple words" }
+      },
+      "games": {
+        "words-find": { "title": "Letter Hunt", "type": "Find the letters" },
+        "phonics-match": { "title": "Sound Match", "type": "Match sounds" },
+        "word-spell": { "title": "Spell It!", "type": "Build words" },
+        "rhyme-time": { "title": "Rhyme Time", "type": "Find rhyming words" }
+      }
+    },
+    "music": {
+      "title": "Music Courses",
+      "subtitle": "Explore sounds, rhythms, and melodies through playful musical activities",
+      "courses": {
+        "beginner": { "title": "Sound Explorers", "ageRange": "Ages 3-5", "description": "Listen and discover musical sounds" },
+        "intermediate": { "title": "Rhythm Builders", "ageRange": "Ages 5-7", "description": "Create and remember musical patterns" },
+        "advanced": { "title": "Music Masters", "ageRange": "Ages 7-9", "description": "Compose and perform music" }
+      },
+      "games": {
+        "listen-repeat": { "title": "Listen & Repeat", "type": "Echo simple sound patterns" },
+        "sound-safari": { "title": "Sound Safari", "type": "Find and identify different sounds" },
+        "tap-along": { "title": "Tap Along", "type": "Tap to the beat of simple rhythms" },
+        "high-low": { "title": "High & Low", "type": "Recognize high and low sounds" },
+        "instrument-match": { "title": "Instrument Match", "type": "Match sounds to instruments" },
+        "rhythm-match": { "title": "Rhythm Match", "type": "Copy rhythmic patterns" },
+        "melody-memory": { "title": "Melody Memory", "type": "Remember short melodies" },
+        "beat-builder": { "title": "Beat Builder", "type": "Create simple drum beats" },
+        "note-sequence": { "title": "Note Sequence", "type": "Play notes in the right order" },
+        "tempo-tap": { "title": "Tempo Tap", "type": "Keep time with different speeds" },
+        "make-music": { "title": "Make Music", "type": "Compose your own melodies" },
+        "harmony-helper": { "title": "Harmony Helper", "type": "Combine sounds that go together" },
+        "song-builder": { "title": "Song Builder", "type": "Create a complete song" },
+        "music-puzzle": { "title": "Music Puzzle", "type": "Solve musical challenges" },
+        "performance": { "title": "Performance", "type": "Play a song from memory" }
+      }
+    },
+    "creative": {
+      "title": "Creative Courses",
+      "subtitle": "Draw, design, and let your imagination flow!",
+      "courses": {
+        "beginner": { "title": "Art Explorers", "ageRange": "Ages 3-5", "description": "Draw and create with colors" },
+        "intermediate": { "title": "Creative Minds", "ageRange": "Ages 5-7", "description": "Design patterns and stories" },
+        "advanced": { "title": "Master Artists", "ageRange": "Ages 7-9", "description": "Advanced creative projects" }
+      },
+      "games": {
+        "creative-draw": { "title": "Free Draw", "type": "Draw anything!" },
+        "color-mixing-lab": { "title": "Color Mixing Lab", "type": "Mix colors together" },
+        "stamp-studio": { "title": "Stamp Studio", "type": "Create with stamps" },
+        "shape-creatures": { "title": "Shape Creatures", "type": "Build funny animals" },
+        "nature-collage": { "title": "Nature Collage", "type": "Arrange nature items" },
+        "story-builder": { "title": "Story Builder", "type": "Create a story" },
+        "symmetry-mirror": { "title": "Symmetry Mirror", "type": "Draw mirrored art" },
+        "pattern-designer": { "title": "Pattern Designer", "type": "Create patterns" },
+        "garden-designer": { "title": "Garden Designer", "type": "Design a garden" },
+        "texture-explorer": { "title": "Texture Explorer", "type": "Match textures" },
+        "constellation-creator": { "title": "Constellation Creator", "type": "Connect the stars" },
+        "emoji-stories": { "title": "Emoji Stories", "type": "Tell emoji tales" },
+        "shadow-theater": { "title": "Shadow Theater", "type": "Create shadow art" },
+        "music-painter": { "title": "Music Painter", "type": "Paint with sounds" },
+        "mandala-maker": { "title": "Mandala Maker", "type": "Symmetrical art" }
+      }
+    },
+    "languages": {
+      "title": "Languages Courses",
+      "subtitle": "Learn Portuguese (Portugal) with fun exercises!",
+      "comingSoon": "Em Breve:",
+      "comingSoonAudio": "Listen to native Portuguese pronunciation with AI voice",
+      "learningPortuguese": "LEARNING PORTUGUESE",
+      "unlockMore": "Complete games to unlock more vocabulary! 🌟",
+      "courses": {
+        "beginner": { "title": "First Words", "ageRange": "Ages 3-5", "description": "Learn everyday Portuguese objects" },
+        "intermediate": { "title": "Word Builders", "ageRange": "Ages 5-7", "description": "Expand vocabulary with categories" },
+        "advanced": { "title": "Fluent Explorers", "ageRange": "Ages 7-9", "description": "Build sentences and cultural knowledge" }
+      },
+      "games": {
+        "object-match": { "title": "Object Match", "type": "Match pictures & words" },
+        "animal-names": { "title": "Animal Names", "type": "Learn animal words" },
+        "food-fun": { "title": "Food Fun", "type": "Everyday food words" },
+        "color-words": { "title": "Color Words", "type": "Portuguese colors" },
+        "number-count": { "title": "Count 1-10", "type": "Numbers in Portuguese" },
+        "home-objects": { "title": "At Home", "type": "Household items" },
+        "nature-words": { "title": "In Nature", "type": "Plants & outdoors" },
+        "body-parts": { "title": "Body Parts", "type": "Learn body words" },
+        "action-verbs": { "title": "Action Time", "type": "Simple verbs" },
+        "sentence-build": { "title": "Make Sentences", "type": "Build simple sentences" },
+        "describe-it": { "title": "Describe It", "type": "Use adjectives" },
+        "portugal-culture": { "title": "Portugal Fun", "type": "Cultural vocabulary" }
+      }
+    }
   }
 }

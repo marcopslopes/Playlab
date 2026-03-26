@@ -4,6 +4,7 @@ import { ArrowLeft, Volume2, Check, X, Star } from 'lucide-react';
 import { OutdoorBackground } from '../outdoor-background';
 import { CompanionHelper, useCompanionMessage } from '../companion-helper';
 import { useSettings } from '../../contexts/settings-context';
+import { useTranslation } from '../../hooks/use-translation';
 import { useGameProgress } from '../../hooks/use-game-progress';
 import { getRoundsForLevel } from '../../utils/game-config';
 
@@ -46,6 +47,7 @@ const soundPatterns = [
 export function ListenRepeat() {
   const navigate = useNavigate();
   const { theme } = useSettings();
+  const { t } = useTranslation();
   const { completeGame } = useGameProgress({ 
     gameId: 'music/beginner/listen-repeat', 
     categoryId: 'music' 
@@ -160,7 +162,7 @@ export function ListenRepeat() {
             }}
           >
             <ArrowLeft className="w-5 h-5" />
-            <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600 }}>Back</span>
+            <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600 }}>{t('games.back')}</span>
           </Link>
 
           <div className="flex items-center gap-1">
@@ -452,7 +454,7 @@ export function ListenRepeat() {
                       color: theme === 'dark' ? '#E4DCCF' : '#1F2023',
                     }}
                   >
-                    Try Again
+                    {t('games.tryAgain')}
                   </h2>
                   <p style={{ color: theme === 'dark' ? 'rgba(228, 220, 207, 0.7)' : '#6b7280', fontSize: '1.0625rem' }}>
                     Listen carefully and try once more!

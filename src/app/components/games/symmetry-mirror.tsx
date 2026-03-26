@@ -4,6 +4,7 @@ import { ArrowLeft, Star, Eraser, Palette } from 'lucide-react';
 import { OutdoorBackground } from '../outdoor-background';
 import { CompanionHelper, useCompanionMessage } from '../companion-helper';
 import { useSettings } from '../../contexts/settings-context';
+import { useTranslation } from '../../hooks/use-translation';
 import { useGameProgress } from '../../hooks/use-game-progress';
 import { getRoundsForLevel } from '../../utils/game-config';
 
@@ -18,6 +19,7 @@ interface DrawPoint {
 export function SymmetryMirror() {
   const navigate = useNavigate();
   const { theme } = useSettings();
+  const { t } = useTranslation();
   const { completeGame } = useGameProgress({ 
     gameId: 'creative/intermediate/symmetry-mirror', 
     categoryId: 'creative' 
@@ -177,7 +179,7 @@ export function SymmetryMirror() {
             }}
           >
             <ArrowLeft className="w-5 h-5" />
-            <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600 }}>Back</span>
+            <span style={{ fontFamily: 'var(--font-display)', fontWeight: 600 }}>{t('games.back')}</span>
           </Link>
 
           <div className="flex items-center gap-1">
