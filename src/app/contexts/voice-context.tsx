@@ -121,14 +121,19 @@ export function VoiceProvider({ children }: { children: ReactNode }) {
 
       stopCurrentAudio()
 
-      // Serve from cache if available
+      // Serve from cache if available (sync — no await needed)
       const cached = audioCache.get(trimmed)
       if (cached) {
         playBlobUrl(cached, volume, speed)
         return
       }
 
-      // Try OpenAI TTS via /api/tts
+      // Start Web Speech IMMEDIATELY (before any await) so the browser's
+      // user-gesture requirement is met. If OpenAI TTS succeeds later,
+      // we cancel this and play the higher-quality audio instead.
+      speakWebSpeech(trimmed, volume, speed, language)
+
+      // Try to upgrade to OpenAI TTS in the background
       try {
         const res = await fetch('/api/tts', {
           method: 'POST',
@@ -137,17 +142,11 @@ export function VoiceProvider({ children }: { children: ReactNode }) {
         })
 
         const contentType = res.headers.get('content-type') || ''
-        if (!res.ok || !contentType.includes('audio')) {
-          // Not a real TTS response — fall back to Web Speech.
-          // In Vite dev mode, /api/tts returns index.html (200) due to SPA fallback.
-          speakWebSpeech(trimmed, volume, speed, language)
-          return
-        }
+        if (!res.ok || !contentType.includes('audio')) return // Web Speech already playing — leave it
 
         const blob = await res.blob()
         const url = URL.createObjectURL(blob)
         audioCache.set(trimmed, url)
-        // Evict oldest entry if cache exceeds 50 items
         if (audioCache.size > 50) {
           const firstKey = audioCache.keys().next().value
           if (firstKey !== undefined) {
@@ -155,10 +154,11 @@ export function VoiceProvider({ children }: { children: ReactNode }) {
             audioCache.delete(firstKey)
           }
         }
+        // Replace Web Speech with the higher-quality OpenAI audio
+        stopCurrentAudio()
         playBlobUrl(url, volume, speed)
       } catch {
-        // Network error or /api/tts not available locally — use Web Speech
-        speakWebSpeech(trimmed, volume, speed, language)
+        // Network error — Web Speech is already playing, nothing to do
       }
     },
     [muted, volume, speed, language]
