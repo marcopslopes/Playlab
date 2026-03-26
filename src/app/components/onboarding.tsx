@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { Power, Sparkles, Check } from 'lucide-react';
+import { useTranslation } from '../hooks/use-translation';
 
 export function Onboarding() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [step, setStep] = useState(0);
   const [isPoweredOn, setIsPoweredOn] = useState(false);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
@@ -101,7 +103,7 @@ export function Onboarding() {
                 textTransform: 'uppercase',
               }}
             >
-              TAP TO START
+              {t('onboarding.tapToStart')}
             </p>
           </button>
         ) : (
@@ -118,7 +120,7 @@ export function Onboarding() {
                 animation: 'fadeIn 0.8s ease-out',
               }}
             >
-              Starting up...
+              {t('onboarding.startingUp')}
             </p>
           </div>
         )}
@@ -129,10 +131,10 @@ export function Onboarding() {
   // Step 1: Interactive Color Learning
   if (step === 1) {
     const colors = [
-      { color: '#FF6B6B', emoji: '🔴', label: 'RED' },
-      { color: '#4ECDC4', emoji: '🔵', label: 'BLUE' },
-      { color: '#95E1D3', emoji: '🟢', label: 'GREEN' },
-      { color: '#FDB022', emoji: '🟡', label: 'YELLOW' },
+      { color: '#FF6B6B', emoji: '🔴', label: t('onboarding.colors.red') },
+      { color: '#4ECDC4', emoji: '🔵', label: t('onboarding.colors.blue') },
+      { color: '#95E1D3', emoji: '🟢', label: t('onboarding.colors.green') },
+      { color: '#FDB022', emoji: '🟡', label: t('onboarding.colors.yellow') },
     ];
 
     return (
@@ -154,7 +156,7 @@ export function Onboarding() {
               textTransform: 'uppercase',
             }}
           >
-            TAP A COLOR! 🎨
+            {t('onboarding.tapAColor')}
           </h1>
 
           <div className="grid grid-cols-2 gap-6 max-w-xl mx-auto">
@@ -213,7 +215,7 @@ export function Onboarding() {
               textTransform: 'uppercase',
             }}
           >
-            FIND THE LETTER M! ⌨️
+            {t('onboarding.findLetterTitle')}
           </h1>
           
           <p 
@@ -223,7 +225,7 @@ export function Onboarding() {
               fontSize: '1.25rem',
             }}
           >
-            Look at your keyboard and press the M key
+            {t('onboarding.findLetterHint')}
           </p>
 
           <div className="max-w-md mx-auto">
@@ -252,7 +254,7 @@ export function Onboarding() {
                       textTransform: 'uppercase',
                     }}
                   >
-                    YOU FOUND IT! ✨
+                    {t('onboarding.foundIt')}
                   </p>
                 </div>
               ) : (
@@ -295,7 +297,7 @@ export function Onboarding() {
               textTransform: 'uppercase',
             }}
           >
-            FIND THE NUMBER 5! 🔢
+            {t('onboarding.findNumberTitle')}
           </h1>
           
           <p 
@@ -305,7 +307,7 @@ export function Onboarding() {
               fontSize: '1.25rem',
             }}
           >
-            Look at your keyboard and press the 5 key
+            {t('onboarding.findNumberHint')}
           </p>
 
           <div className="max-w-md mx-auto">
@@ -334,7 +336,7 @@ export function Onboarding() {
                       textTransform: 'uppercase',
                     }}
                   >
-                    AWESOME! ⭐
+                    {t('onboarding.awesome')}
                   </p>
                 </div>
               ) : (
@@ -388,7 +390,7 @@ export function Onboarding() {
               textTransform: 'uppercase',
             }}
           >
-            ✨ YOU DID IT! ✨
+            {t('onboarding.didIt')}
           </h1>
           
           <p 
@@ -398,7 +400,7 @@ export function Onboarding() {
               fontSize: '1.5rem',
             }}
           >
-            You know your keyboard!
+            {t('onboarding.knowKeyboard')}
           </p>
 
           <button
@@ -414,7 +416,7 @@ export function Onboarding() {
               boxShadow: `0 8px 24px ${selectedColor || '#7D9D9C'}60`,
             }}
           >
-            START LEARNING! 🚀
+            {t('onboarding.startLearning')}
           </button>
         </div>
       </div>

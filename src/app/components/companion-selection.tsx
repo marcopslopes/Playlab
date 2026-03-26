@@ -1,34 +1,39 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { OutdoorBackground } from './outdoor-background';
+import { useTranslation } from '../hooks/use-translation';
 
 interface Companion {
   id: string;
-  name: string;
   emoji: string;
-  personality: string;
 }
 
 const companions: Companion[] = [
-  { id: 'owl', name: 'WISE OWL', emoji: '🦉', personality: 'Calm & Thoughtful' },
-  { id: 'bunny', name: 'HAPPY BUNNY', emoji: '🐰', personality: 'Gentle & Playful' },
-  { id: 'fox', name: 'CLEVER FOX', emoji: '🦊', personality: 'Smart & Friendly' },
-  { id: 'bear', name: 'KIND BEAR', emoji: '🐻', personality: 'Warm & Caring' },
-  { id: 'cat', name: 'SWEET CAT', emoji: '🐱', personality: 'Curious & Cozy' },
-  { id: 'dog', name: 'LOYAL DOG', emoji: '🐶', personality: 'Happy & Brave' },
+  { id: 'owl', emoji: '🦉' },
+  { id: 'bunny', emoji: '🐰' },
+  { id: 'fox', emoji: '🦊' },
+  { id: 'bear', emoji: '🐻' },
+  { id: 'cat', emoji: '🐱' },
+  { id: 'dog', emoji: '🐶' },
 ];
 
 export function CompanionSelection() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [selectedCompanion, setSelectedCompanion] = useState<string | null>(null);
   const [hoveredCompanion, setHoveredCompanion] = useState<string | null>(null);
 
   const handleSelectCompanion = () => {
     if (!selectedCompanion) return;
-    
+
     const companion = companions.find(c => c.id === selectedCompanion);
     if (companion) {
-      localStorage.setItem('userCompanion', JSON.stringify(companion));
+      localStorage.setItem('userCompanion', JSON.stringify({
+        id: companion.id,
+        name: t(`companion.companions.${companion.id}.name`),
+        emoji: companion.emoji,
+        personality: t(`companion.companions.${companion.id}.personality`),
+      }));
       localStorage.setItem('hasSeenCompanionSelection', 'true');
       navigate('/daily');
     }
@@ -55,7 +60,7 @@ export function CompanionSelection() {
               textTransform: 'uppercase',
             }}
           >
-            Choose Your Friend
+            {t('companion.chooseTitle')}
           </h1>
           <p 
             style={{ 
@@ -63,7 +68,7 @@ export function CompanionSelection() {
               color: '#6b7280',
             }}
           >
-            Pick a special companion to join you on your journey!
+            {t('companion.chooseSubtitle')}
           </p>
         </div>
 
@@ -111,9 +116,9 @@ export function CompanionSelection() {
                   {companion.emoji}
                 </div>
                 
-                <h3 
+                <h3
                   className="mb-2"
-                  style={{ 
+                  style={{
                     fontFamily: 'var(--font-display)',
                     fontSize: '1.125rem',
                     fontWeight: 700,
@@ -121,16 +126,16 @@ export function CompanionSelection() {
                     textTransform: 'uppercase',
                   }}
                 >
-                  {companion.name}
+                  {t(`companion.companions.${companion.id}.name`)}
                 </h3>
-                
-                <p 
-                  style={{ 
+
+                <p
+                  style={{
                     fontSize: '0.9375rem',
                     color: isSelected ? 'rgba(255, 255, 255, 0.9)' : '#6b7280',
                   }}
                 >
-                  {companion.personality}
+                  {t(`companion.companions.${companion.id}.personality`)}
                 </p>
               </button>
             );
@@ -168,7 +173,7 @@ export function CompanionSelection() {
               }
             }}
           >
-            START MY JOURNEY! ✨
+            {t('companion.selectButton')}
           </button>
           
           {!selectedCompanion && (

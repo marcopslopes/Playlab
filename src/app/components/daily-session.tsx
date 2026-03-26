@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 import { OutdoorBackground } from './outdoor-background';
 import { InteractiveSpheresBackground } from './interactive-spheres-background';
 import { useSettings } from '../contexts/settings-context';
+import { useTranslation } from '../hooks/use-translation';
 
 interface Companion {
   id: string;
@@ -14,6 +15,7 @@ interface Companion {
 export function DailySession() {
   const navigate = useNavigate();
   const { theme } = useSettings();
+  const { t } = useTranslation();
   const [companion, setCompanion] = useState<Companion | null>(null);
   const [userName, setUserName] = useState<string>('Friend');
 
@@ -33,9 +35,9 @@ export function DailySession() {
 
   const getGreeting = () => {
     const hour = new Date().getHours();
-    if (hour < 12) return 'Good Morning';
-    if (hour < 18) return 'Good Afternoon';
-    return 'Good Evening';
+    if (hour < 12) return t('daily.greetingMorning');
+    if (hour < 18) return t('daily.greetingAfternoon');
+    return t('daily.greetingEvening');
   };
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -145,10 +147,10 @@ export function DailySession() {
               onClick={() => {
                 // Companion reacts when clicked
                 const messages = [
-                  "You're doing great!",
-                  "Let's learn together!",
-                  "I'm so proud of you!",
-                  "Ready for fun?",
+                  t('companion.messages.0'),
+                  t('companion.messages.1'),
+                  t('companion.messages.2'),
+                  t('companion.messages.3'),
                 ];
                 alert(messages[Math.floor(Math.random() * messages.length)]);
               }}
@@ -199,7 +201,7 @@ export function DailySession() {
                 fontWeight: 400,
               }}
             >
-              Ready for today's practice?
+              {t('daily.readyForPractice')}
             </p>
           </div>
 
@@ -253,7 +255,7 @@ export function DailySession() {
                 color: '#7D9D9C',
               }}
             >
-              Start Practice
+              {t('daily.startPractice')}
             </p>
           </div>
 
@@ -278,7 +280,7 @@ export function DailySession() {
                   fontWeight: 500,
                 }}
               >
-                Stars Earned
+                {t('daily.starsEarned')}
               </p>
             </div>
 
@@ -301,7 +303,7 @@ export function DailySession() {
                   fontWeight: 500,
                 }}
               >
-                Day Streak
+                {t('daily.dayStreak')}
               </p>
             </div>
 
@@ -324,7 +326,7 @@ export function DailySession() {
                   fontWeight: 500,
                 }}
               >
-                Completed
+                {t('daily.completed')}
               </p>
             </div>
           </div>
