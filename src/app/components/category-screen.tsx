@@ -3,6 +3,7 @@ import { ArrowLeft, Star, Lock, Trophy } from 'lucide-react';
 import { useSettings } from '../contexts/settings-context';
 import { useProgress } from '../contexts/progress-context';
 import { OutdoorBackground } from './outdoor-background';
+import { CompanionHelper } from './companion-helper';
 import { useMemo } from 'react';
 
 interface Game {
@@ -149,6 +150,7 @@ export function CategoryScreen() {
         fontFamily: 'var(--font-body)',
       }}
     >
+      <CompanionHelper />
       <OutdoorBackground />
 
       <div className="max-w-4xl mx-auto relative" style={{ zIndex: 1 }}>

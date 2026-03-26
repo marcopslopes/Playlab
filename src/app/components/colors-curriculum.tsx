@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { ArrowLeft, Palette, Lock, Star, Trophy, CheckCircle2, Sparkles } from 'lucide-react';
+import { useTranslation } from '../hooks/use-translation';
+import { CompanionHelper } from './companion-helper';
 
 interface Course {
   id: string;
@@ -24,41 +26,42 @@ interface Game {
   emoji: string;
 }
 
-const courses: Course[] = [
-  {
-    id: 'beginner',
-    title: 'Color Explorers',
-    ageRange: 'Ages 3-5',
-    description: 'Learn basic colors and matching',
-    color: '#FF6B6B',
-    locked: false,
-    progress: 0,
-    emoji: '🌈',
-    games: [
-      { id: 'color-match', title: 'Color Match', type: 'Match the colors', completed: false, stars: 0, locked: false, emoji: '🎨' },
-      { id: 'rainbow-sort', title: 'Rainbow Sort', type: 'Sort by rainbow', completed: false, stars: 0, locked: false, emoji: '🌈' },
-      { id: 'shade-finder', title: 'Same or Different?', type: 'Find matching shades', completed: false, stars: 0, locked: true, emoji: '🔍' },
-    ],
-  },
-  {
-    id: 'intermediate',
-    title: 'Color Mixers',
-    ageRange: 'Ages 5-7',
-    description: 'Mix and create new colors',
-    color: '#C08B7E',
-    locked: false,
-    progress: 0,
-    emoji: '🎨',
-    games: [
-      { id: 'color-blend', title: 'Mix It Up', type: 'Blend colors', completed: false, stars: 0, locked: false, emoji: '🌊' },
-      { id: 'palette-match', title: 'Palette Master', type: 'Match color groups', completed: false, stars: 0, locked: true, emoji: '🎭' },
-    ],
-  },
-];
-
 export function ColorsCurriculum() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [expandedCourse, setExpandedCourse] = useState<string>('beginner');
+
+  const courses: Course[] = [
+    {
+      id: 'beginner',
+      title: t('curriculum.colors.courses.beginner.title'),
+      ageRange: t('curriculum.colors.courses.beginner.ageRange'),
+      description: t('curriculum.colors.courses.beginner.description'),
+      color: '#FF6B6B',
+      locked: false,
+      progress: 0,
+      emoji: '🌈',
+      games: [
+        { id: 'color-match', title: t('curriculum.colors.games.color-match.title'), type: t('curriculum.colors.games.color-match.type'), completed: false, stars: 0, locked: false, emoji: '🎨' },
+        { id: 'rainbow-sort', title: t('curriculum.colors.games.rainbow-sort.title'), type: t('curriculum.colors.games.rainbow-sort.type'), completed: false, stars: 0, locked: false, emoji: '🌈' },
+        { id: 'shade-finder', title: t('curriculum.colors.games.shade-finder.title'), type: t('curriculum.colors.games.shade-finder.type'), completed: false, stars: 0, locked: true, emoji: '🔍' },
+      ],
+    },
+    {
+      id: 'intermediate',
+      title: t('curriculum.colors.courses.intermediate.title'),
+      ageRange: t('curriculum.colors.courses.intermediate.ageRange'),
+      description: t('curriculum.colors.courses.intermediate.description'),
+      color: '#C08B7E',
+      locked: false,
+      progress: 0,
+      emoji: '🎨',
+      games: [
+        { id: 'color-blend', title: t('curriculum.colors.games.color-blend.title'), type: t('curriculum.colors.games.color-blend.type'), completed: false, stars: 0, locked: false, emoji: '🌊' },
+        { id: 'palette-match', title: t('curriculum.colors.games.palette-match.title'), type: t('curriculum.colors.games.palette-match.type'), completed: false, stars: 0, locked: true, emoji: '🎭' },
+      ],
+    },
+  ];
 
   const handleGameClick = (courseId: string, gameId: string, locked: boolean) => {
     if (locked) {
@@ -68,34 +71,35 @@ export function ColorsCurriculum() {
   };
 
   return (
-    <div 
+    <div
       className="min-h-screen px-4 sm:px-6 py-6 sm:py-8"
-      style={{ 
+      style={{
         background: 'linear-gradient(to bottom, #F8F6F3, #EAE6DF)',
         fontFamily: 'var(--font-body)',
       }}
     >
+      <CompanionHelper />
       <div className="max-w-5xl mx-auto">
         <div className="mb-8">
-          <Link 
-            to="/practice" 
+          <Link
+            to="/practice"
             className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 transition-colors mb-6"
           >
             <ArrowLeft className="w-5 h-5" />
-            <span style={{ fontSize: '0.9375rem' }}>BACK TO PRACTICE</span>
+            <span style={{ fontSize: '0.9375rem' }}>{t('curriculum.backToPractice')}</span>
           </Link>
 
           <div className="text-center mb-8">
-            <div 
+            <div
               className="w-20 h-20 mx-auto mb-4 rounded-3xl flex items-center justify-center"
               style={{ backgroundColor: '#FF6B6B20' }}
             >
               <Palette className="w-10 h-10" style={{ color: '#FF6B6B' }} />
             </div>
-            
-            <h1 
+
+            <h1
               className="mb-3"
-              style={{ 
+              style={{
                 fontFamily: 'var(--font-display)',
                 fontSize: '2.5rem',
                 fontWeight: 700,
@@ -103,14 +107,14 @@ export function ColorsCurriculum() {
                 textTransform: 'uppercase',
               }}
             >
-              COLORS 🌈
+              {t('curriculum.colors.title')}
             </h1>
-            
-            <p 
+
+            <p
               className="text-gray-600"
               style={{ fontSize: '1.125rem' }}
             >
-              Learn, mix, and master colors!
+              {t('curriculum.colors.subtitle')}
             </p>
           </div>
         </div>
@@ -136,17 +140,17 @@ export function ColorsCurriculum() {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div 
+                    <div
                       className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl"
                       style={{ backgroundColor: `${course.color}20` }}
                     >
                       {course.emoji}
                     </div>
-                    
+
                     <div>
                       <div className="flex items-center gap-3 mb-1">
-                        <h2 
-                          style={{ 
+                        <h2
+                          style={{
                             fontFamily: 'var(--font-display)',
                             fontSize: '1.5rem',
                             fontWeight: 700,
@@ -160,15 +164,15 @@ export function ColorsCurriculum() {
                           <Lock className="w-5 h-5 text-gray-400" />
                         )}
                       </div>
-                      
-                      <p 
+
+                      <p
                         className="text-gray-500 mb-1"
                         style={{ fontSize: '0.875rem' }}
                       >
                         {course.ageRange}
                       </p>
-                      
-                      <p 
+
+                      <p
                         className="text-gray-600"
                         style={{ fontSize: '0.9375rem' }}
                       >
@@ -176,20 +180,20 @@ export function ColorsCurriculum() {
                       </p>
                     </div>
                   </div>
-                  
+
                   <div className="text-right">
-                    <div 
+                    <div
                       className="text-2xl font-bold mb-1"
                       style={{ color: course.color }}
                     >
                       {course.progress}%
                     </div>
-                    <div 
+                    <div
                       className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden"
                     >
-                      <div 
+                      <div
                         className="h-full rounded-full transition-all"
-                        style={{ 
+                        style={{
                           width: `${course.progress}%`,
                           backgroundColor: course.color,
                         }}
@@ -201,7 +205,7 @@ export function ColorsCurriculum() {
 
               {/* Games List */}
               {expandedCourse === course.id && !course.locked && (
-                <div 
+                <div
                   className="px-6 pb-6"
                   style={{ backgroundColor: '#fafafa' }}
                 >
@@ -221,17 +225,17 @@ export function ColorsCurriculum() {
                       >
                         <div className="flex items-start justify-between mb-3">
                           <div className="text-3xl">{game.emoji}</div>
-                          
+
                           {game.locked ? (
                             <Lock className="w-4 h-4 text-gray-400" />
                           ) : game.completed ? (
                             <CheckCircle2 className="w-5 h-5" style={{ color: course.color }} />
                           ) : null}
                         </div>
-                        
-                        <h3 
+
+                        <h3
                           className="mb-1"
-                          style={{ 
+                          style={{
                             fontFamily: 'var(--font-display)',
                             fontSize: '1.125rem',
                             fontWeight: 700,
@@ -241,21 +245,21 @@ export function ColorsCurriculum() {
                         >
                           {game.title}
                         </h3>
-                        
-                        <p 
+
+                        <p
                           className="mb-3 text-gray-500"
                           style={{ fontSize: '0.8125rem' }}
                         >
                           {game.type}
                         </p>
-                        
+
                         {!game.locked && (
                           <div className="flex gap-1">
                             {[1, 2, 3].map((star) => (
                               <Star
                                 key={star}
                                 className="w-4 h-4"
-                                style={{ 
+                                style={{
                                   color: star <= game.stars ? '#FDB022' : '#e5e7eb',
                                   fill: star <= game.stars ? '#FDB022' : 'none',
                                 }}

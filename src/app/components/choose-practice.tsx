@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router';
 import { ArrowLeft, Brain, Lightbulb, Target, BookOpen, Shapes, Sparkles, Shuffle, RotateCcw, Calculator, Palette, Languages, Settings, BarChart, Flower2, Music } from 'lucide-react';
 import { useSettings } from '../contexts/settings-context';
 import { useTranslation } from '../hooks/use-translation';
+import { CompanionHelper } from './companion-helper';
 
 const categories = [
   {
@@ -110,6 +111,7 @@ export function ChoosePractice() {
         fontFamily: 'var(--font-body)',
       }}
     >
+      <CompanionHelper />
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-10">

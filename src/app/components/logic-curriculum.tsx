@@ -4,6 +4,8 @@ import { ArrowLeft, Brain, Lock, Star, Trophy, CheckCircle2, Sparkles } from 'lu
 import { useSettings } from '../contexts/settings-context';
 import { useProgress } from '../contexts/progress-context';
 import { OutdoorBackground } from './outdoor-background';
+import { CompanionHelper } from './companion-helper';
+import { useTranslation } from '../hooks/use-translation';
 
 interface Course {
   id: string;
@@ -27,66 +29,67 @@ interface Game {
   emoji: string;
 }
 
-const courses: Course[] = [
-  {
-    id: 'beginner',
-    title: 'Pattern Explorers',
-    ageRange: 'Ages 3-5',
-    description: 'Learn colors, shapes, and simple patterns',
-    color: '#7D9D9C',
-    locked: false,
-    progress: 60,
-    emoji: '🌟',
-    games: [
-      { id: 'pattern-match', title: 'Pattern Match', type: 'Match the patterns', completed: true, stars: 3, locked: false, emoji: '🎨' },
-      { id: 'color-sort', title: 'Color Fun', type: 'Sort by color', completed: true, stars: 2, locked: false, emoji: '🌈' },
-      { id: 'memory-match', title: 'Memory Match', type: 'Find the pairs', completed: false, stars: 0, locked: false, emoji: '🧠' },
-      { id: 'number-counting', title: 'Count 1-2-3', type: 'Tap numbers in order', completed: false, stars: 0, locked: false, emoji: '🔢' },
-      { id: 'shape-find', title: 'Shape Hunt', type: 'Find matching shapes', completed: false, stars: 0, locked: true, emoji: '⭐' },
-      { id: 'size-order', title: 'Size It Up', type: 'Big to small', completed: false, stars: 0, locked: true, emoji: '📏' },
-    ],
-  },
-  {
-    id: 'intermediate',
-    title: 'Logic Builders',
-    ageRange: 'Ages 5-7',
-    description: 'Discover rules and solve puzzles',
-    color: '#C08B7E',
-    locked: false,
-    progress: 25,
-    emoji: '🚀',
-    games: [
-      { id: 'sequence-next', title: 'What\'s Next?', type: 'Predict sequences', completed: true, stars: 2, locked: false, emoji: '🔮' },
-      { id: 'rule-finder', title: 'Rule Detective', type: 'Find the rule', completed: false, stars: 0, locked: false, emoji: '🔍' },
-      { id: 'category-sort', title: 'Sort & Match', type: 'Group by type', completed: false, stars: 0, locked: true, emoji: '📦' },
-      { id: 'odd-one-out', title: 'Odd One Out', type: 'Find the different one', completed: false, stars: 0, locked: true, emoji: '🎯' },
-      { id: 'pattern-create', title: 'Make Patterns', type: 'Create your own', completed: false, stars: 0, locked: true, emoji: '✨' },
-    ],
-  },
-  {
-    id: 'advanced',
-    title: 'Puzzle Masters',
-    ageRange: 'Ages 7-9',
-    description: 'Master tricky puzzles and challenges',
-    color: '#7C8B95',
-    locked: true,
-    progress: 0,
-    emoji: '🏆',
-    games: [
-      { id: 'multi-pattern', title: 'Super Patterns', type: 'Multiple rules', completed: false, stars: 0, locked: true, emoji: '🌟' },
-      { id: 'logic-grid', title: 'Grid Master', type: 'Solve the grid', completed: false, stars: 0, locked: true, emoji: '🎲' },
-      { id: 'analogy', title: 'Brain Teasers', type: 'Find connections', completed: false, stars: 0, locked: true, emoji: '🧠' },
-      { id: 'deduction', title: 'Super Detective', type: 'Use clues', completed: false, stars: 0, locked: true, emoji: '🕵️' },
-      { id: 'transformation', title: 'Shape Shifter', type: 'Rotate & flip', completed: false, stars: 0, locked: true, emoji: '🔄' },
-    ],
-  },
-];
-
 export function LogicCurriculum() {
   const navigate = useNavigate();
   const { theme } = useSettings();
   const { getGameProgress, progress } = useProgress();
+  const { t } = useTranslation();
   const [selectedCourse, setSelectedCourse] = useState<string>('beginner');
+
+  const courses: Course[] = [
+    {
+      id: 'beginner',
+      title: t('curriculum.logic.courses.beginner.title'),
+      ageRange: t('curriculum.logic.courses.beginner.ageRange'),
+      description: t('curriculum.logic.courses.beginner.description'),
+      color: '#7D9D9C',
+      locked: false,
+      progress: 60,
+      emoji: '🌟',
+      games: [
+        { id: 'pattern-match', title: t('curriculum.logic.games.pattern-match.title'), type: t('curriculum.logic.games.pattern-match.type'), completed: true, stars: 3, locked: false, emoji: '🎨' },
+        { id: 'color-sort', title: t('curriculum.logic.games.color-sort.title'), type: t('curriculum.logic.games.color-sort.type'), completed: true, stars: 2, locked: false, emoji: '🌈' },
+        { id: 'memory-match', title: t('curriculum.logic.games.memory-match.title'), type: t('curriculum.logic.games.memory-match.type'), completed: false, stars: 0, locked: false, emoji: '🧠' },
+        { id: 'number-counting', title: t('curriculum.logic.games.number-counting.title'), type: t('curriculum.logic.games.number-counting.type'), completed: false, stars: 0, locked: false, emoji: '🔢' },
+        { id: 'shape-find', title: t('curriculum.logic.games.shape-find.title'), type: t('curriculum.logic.games.shape-find.type'), completed: false, stars: 0, locked: true, emoji: '⭐' },
+        { id: 'size-order', title: t('curriculum.logic.games.size-order.title'), type: t('curriculum.logic.games.size-order.type'), completed: false, stars: 0, locked: true, emoji: '📏' },
+      ],
+    },
+    {
+      id: 'intermediate',
+      title: t('curriculum.logic.courses.intermediate.title'),
+      ageRange: t('curriculum.logic.courses.intermediate.ageRange'),
+      description: t('curriculum.logic.courses.intermediate.description'),
+      color: '#C08B7E',
+      locked: false,
+      progress: 25,
+      emoji: '🚀',
+      games: [
+        { id: 'sequence-next', title: t('curriculum.logic.games.sequence-next.title'), type: t('curriculum.logic.games.sequence-next.type'), completed: true, stars: 2, locked: false, emoji: '🔮' },
+        { id: 'rule-finder', title: t('curriculum.logic.games.rule-finder.title'), type: t('curriculum.logic.games.rule-finder.type'), completed: false, stars: 0, locked: false, emoji: '🔍' },
+        { id: 'category-sort', title: t('curriculum.logic.games.category-sort.title'), type: t('curriculum.logic.games.category-sort.type'), completed: false, stars: 0, locked: true, emoji: '📦' },
+        { id: 'odd-one-out', title: t('curriculum.logic.games.odd-one-out.title'), type: t('curriculum.logic.games.odd-one-out.type'), completed: false, stars: 0, locked: true, emoji: '🎯' },
+        { id: 'pattern-create', title: t('curriculum.logic.games.pattern-create.title'), type: t('curriculum.logic.games.pattern-create.type'), completed: false, stars: 0, locked: true, emoji: '✨' },
+      ],
+    },
+    {
+      id: 'advanced',
+      title: t('curriculum.logic.courses.advanced.title'),
+      ageRange: t('curriculum.logic.courses.advanced.ageRange'),
+      description: t('curriculum.logic.courses.advanced.description'),
+      color: '#7C8B95',
+      locked: true,
+      progress: 0,
+      emoji: '🏆',
+      games: [
+        { id: 'multi-pattern', title: t('curriculum.logic.games.multi-pattern.title'), type: t('curriculum.logic.games.multi-pattern.type'), completed: false, stars: 0, locked: true, emoji: '🌟' },
+        { id: 'logic-grid', title: t('curriculum.logic.games.logic-grid.title'), type: t('curriculum.logic.games.logic-grid.type'), completed: false, stars: 0, locked: true, emoji: '🎲' },
+        { id: 'analogy', title: t('curriculum.logic.games.analogy.title'), type: t('curriculum.logic.games.analogy.type'), completed: false, stars: 0, locked: true, emoji: '🧠' },
+        { id: 'deduction', title: t('curriculum.logic.games.deduction.title'), type: t('curriculum.logic.games.deduction.type'), completed: false, stars: 0, locked: true, emoji: '🕵️' },
+        { id: 'transformation', title: t('curriculum.logic.games.transformation.title'), type: t('curriculum.logic.games.transformation.type'), completed: false, stars: 0, locked: true, emoji: '🔄' },
+      ],
+    },
+  ];
 
   // Calculate real progress for courses based on actual game data
   const coursesWithProgress = useMemo(() => {
@@ -96,7 +99,7 @@ export function LogicCurriculum() {
       const gamesWithProgress = course.games.map((game, index) => {
         const gameId = `logic/${course.id}/${game.id}`;
         const gameProgress = getGameProgress(gameId);
-        
+
         // Determine if game is locked (progressive unlocking)
         // First 2 games are always unlocked, rest unlock after previous is completed
         let isLocked = false;
@@ -105,7 +108,7 @@ export function LogicCurriculum() {
           const previousProgress = getGameProgress(previousGameId);
           isLocked = !previousProgress || !previousProgress.completed;
         }
-        
+
         return {
           ...game,
           stars: gameProgress?.stars || 0,
@@ -130,7 +133,7 @@ export function LogicCurriculum() {
     // Second pass: determine course locks based on previous course progress
     return coursesData.map((course, index) => {
       let courseLocked = course.locked;
-      
+
       if (course.id === 'intermediate' && index > 0) {
         const beginnerProgress = coursesData[0].progress;
         courseLocked = beginnerProgress < 50;
@@ -154,55 +157,56 @@ export function LogicCurriculum() {
   };
 
   return (
-    <div 
+    <div
       className="min-h-screen px-4 sm:px-6 py-6 sm:py-8 relative overflow-hidden"
-      style={{ 
+      style={{
         fontFamily: 'var(--font-body)',
         backgroundColor: theme === 'dark' ? '#1F2023' : '#F5F5F0',
         color: theme === 'dark' ? '#E4DCCF' : '#1F2023',
       }}
     >
+      <CompanionHelper />
       <OutdoorBackground />
-      
+
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Header */}
         <div className="mb-8">
-          <Link 
-            to="/practice" 
+          <Link
+            to="/practice"
             className="inline-flex items-center gap-2 transition-colors mb-8"
             style={{
               color: theme === 'dark' ? '#E4DCCF' : '#6b7280',
             }}
           >
             <ArrowLeft className="w-5 h-5" />
-            <span style={{ fontSize: '0.9375rem' }}>Back to Practice</span>
+            <span style={{ fontSize: '0.9375rem' }}>{t('curriculum.backToPractice')}</span>
           </Link>
-          
+
           <div className="text-center">
-            <div 
-              className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-4" 
+            <div
+              className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-4"
               style={{ backgroundColor: theme === 'dark' ? 'rgba(125, 157, 156, 0.2)' : '#7D9D9C20' }}
             >
               <Brain className="w-8 h-8" style={{ color: '#7D9D9C' }} />
             </div>
-            <h1 
+            <h1
               className="mb-2"
-              style={{ 
+              style={{
                 fontFamily: 'var(--font-display)',
                 fontSize: '2.25rem',
                 fontWeight: 600,
                 color: theme === 'dark' ? '#E4DCCF' : '#1F2023',
               }}
             >
-              Logic Courses
+              {t('curriculum.logic.title')}
             </h1>
-            <p 
-              style={{ 
+            <p
+              style={{
                 fontSize: '1.0625rem',
                 color: theme === 'dark' ? 'rgba(228, 220, 207, 0.7)' : '#6b7280',
               }}
             >
-              Choose a course to begin
+              {t('curriculum.chooseACourse')}
             </p>
           </div>
         </div>
@@ -212,16 +216,16 @@ export function LogicCurriculum() {
           {coursesWithProgress.map((course) => {
             const isExpanded = selectedCourse === course.id;
             const canExpand = !course.locked;
-            
+
             return (
-              <div 
+              <div
                 key={course.id}
                 className="rounded-3xl overflow-hidden transition-all"
-                style={{ 
+                style={{
                   backgroundColor: theme === 'dark' ? 'rgba(228, 220, 207, 0.1)' : '#fff',
                   backdropFilter: 'blur(10px)',
-                  boxShadow: theme === 'dark' 
-                    ? '0 4px 20px rgba(0, 0, 0, 0.3)' 
+                  boxShadow: theme === 'dark'
+                    ? '0 4px 20px rgba(0, 0, 0, 0.3)'
                     : '0 4px 20px rgba(0, 0, 0, 0.06)',
                   opacity: course.locked ? 0.6 : 1,
                 }}
@@ -231,14 +235,14 @@ export function LogicCurriculum() {
                   onClick={() => canExpand && setSelectedCourse(isExpanded ? '' : course.id)}
                   disabled={course.locked}
                   className="w-full p-6 sm:p-7 text-left transition-colors"
-                  style={{ 
+                  style={{
                     cursor: course.locked ? 'not-allowed' : 'pointer',
                     backgroundColor: 'transparent',
                   }}
                   onMouseEnter={(e) => {
                     if (!course.locked) {
-                      e.currentTarget.style.backgroundColor = theme === 'dark' 
-                        ? 'rgba(228, 220, 207, 0.05)' 
+                      e.currentTarget.style.backgroundColor = theme === 'dark'
+                        ? 'rgba(228, 220, 207, 0.05)'
                         : 'rgba(0, 0, 0, 0.02)';
                     }
                   }}
@@ -249,9 +253,9 @@ export function LogicCurriculum() {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-5 flex-1">
                       {/* Course Icon */}
-                      <div 
+                      <div
                         className="flex-shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center"
-                        style={{ 
+                        style={{
                           backgroundColor: course.locked ? '#f3f4f6' : `${course.color}20`,
                         }}
                       >
@@ -264,9 +268,9 @@ export function LogicCurriculum() {
 
                       {/* Course Info */}
                       <div className="flex-1">
-                        <h2 
+                        <h2
                           className="mb-1"
-                          style={{ 
+                          style={{
                             fontFamily: 'var(--font-display)',
                             fontSize: '1.375rem',
                             fontWeight: 600,
@@ -275,11 +279,11 @@ export function LogicCurriculum() {
                         >
                           {course.title}
                         </h2>
-                        
+
                         <p className="text-gray-500 mb-1" style={{ fontSize: '0.8125rem', fontWeight: 500 }}>
                           {course.ageRange}
                         </p>
-                        
+
                         <p className="text-gray-600" style={{ fontSize: '0.9375rem' }}>
                           {course.description}
                         </p>
@@ -288,16 +292,16 @@ export function LogicCurriculum() {
                         {course.progress > 0 && !course.locked && (
                           <div className="mt-3 max-w-xs">
                             <div className="flex items-center justify-between mb-1">
-                              <span className="text-xs text-gray-500">Progress</span>
+                              <span className="text-xs text-gray-500">{t('curriculum.progress')}</span>
                               <span className="text-xs font-semibold" style={{ color: course.color }}>{course.progress}%</span>
                             </div>
-                            <div 
+                            <div
                               className="h-1.5 rounded-full overflow-hidden"
                               style={{ backgroundColor: '#f3f4f6' }}
                             >
-                              <div 
+                              <div
                                 className="h-full rounded-full transition-all"
-                                style={{ 
+                                style={{
                                   width: `${course.progress}%`,
                                   backgroundColor: course.color,
                                 }}
@@ -305,10 +309,10 @@ export function LogicCurriculum() {
                             </div>
                           </div>
                         )}
-                        
+
                         {course.locked && (
                           <div className="mt-2 text-sm text-gray-500">
-                            Complete previous course to unlock
+                            {t('curriculum.completePrevious')}
                           </div>
                         )}
                       </div>
@@ -324,14 +328,14 @@ export function LogicCurriculum() {
                     {/* Expand Arrow */}
                     {!course.locked && (
                       <div className="ml-4">
-                        <div 
+                        <div
                           className="transition-transform"
                           style={{ transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
                         >
-                          <svg 
-                            className="w-5 h-5 text-gray-400" 
-                            fill="none" 
-                            viewBox="0 0 24 24" 
+                          <svg
+                            className="w-5 h-5 text-gray-400"
+                            fill="none"
+                            viewBox="0 0 24 24"
                             stroke="currentColor"
                           >
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -346,7 +350,7 @@ export function LogicCurriculum() {
                 {isExpanded && !course.locked && (
                   <div className="px-6 pb-6 pt-2">
                     <p className="text-gray-500 text-center mb-4" style={{ fontSize: '0.875rem' }}>
-                      Click a game to start playing
+                      {t('curriculum.clickToPlay')}
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {course.games.map((game, idx) => (
@@ -377,28 +381,28 @@ export function LogicCurriculum() {
                           <div className="flex items-start justify-between gap-3">
                             <div className="flex-1">
                               <div className="flex items-center gap-2 mb-2">
-                                <span 
+                                <span
                                   className="text-xs font-semibold px-2 py-0.5 rounded"
-                                  style={{ 
+                                  style={{
                                     backgroundColor: course.color,
                                     color: 'white',
                                   }}
                                 >
                                   {idx + 1}
                                 </span>
-                                
+
                                 {game.locked && (
                                   <Lock className="w-3.5 h-3.5 text-gray-400" />
                                 )}
-                                
+
                                 {game.completed && (
                                   <CheckCircle2 className="w-4 h-4" style={{ color: course.color }} />
                                 )}
                               </div>
-                              
-                              <h3 
+
+                              <h3
                                 className="mb-1"
-                                style={{ 
+                                style={{
                                   fontFamily: 'var(--font-display)',
                                   fontSize: '1rem',
                                   fontWeight: 600,
@@ -407,7 +411,7 @@ export function LogicCurriculum() {
                               >
                                 {game.title}
                               </h3>
-                              
+
                               <p className="text-gray-500" style={{ fontSize: '0.8125rem' }}>
                                 {game.type}
                               </p>
@@ -420,7 +424,7 @@ export function LogicCurriculum() {
                                   <Star
                                     key={star}
                                     className="w-4 h-4"
-                                    style={{ 
+                                    style={{
                                       color: star <= game.stars ? '#FDB022' : '#e5e7eb',
                                       fill: star <= game.stars ? '#FDB022' : 'none',
                                     }}

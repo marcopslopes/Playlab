@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { ArrowLeft, Calculator, Lock, Star, CheckCircle2 } from 'lucide-react';
+import { useTranslation } from '../hooks/use-translation';
+import { CompanionHelper } from './companion-helper';
 
 interface Course {
   id: string;
@@ -24,56 +26,57 @@ interface Game {
   emoji: string;
 }
 
-const courses: Course[] = [
-  {
-    id: 'beginner',
-    title: 'Number Friends',
-    ageRange: 'Ages 3-5',
-    description: 'Count and recognize numbers',
-    color: '#FDB022',
-    locked: false,
-    progress: 0,
-    emoji: '🔢',
-    games: [
-      { id: 'count-tap', title: 'Tap & Count', type: 'Count objects', completed: false, stars: 0, locked: false, emoji: '👆' },
-      { id: 'number-match', title: 'Number Match', type: 'Match numbers', completed: false, stars: 0, locked: false, emoji: '🎯' },
-      { id: 'more-less', title: 'More or Less?', type: 'Compare amounts', completed: false, stars: 0, locked: true, emoji: '⚖️' },
-    ],
-  },
-  {
-    id: 'intermediate',
-    title: 'Math Wizards',
-    ageRange: 'Ages 5-7',
-    description: 'Add and subtract with fun',
-    color: '#C08B7E',
-    locked: false,
-    progress: 0,
-    emoji: '✨',
-    games: [
-      { id: 'math-fun', title: 'Math Fun', type: 'Simple addition', completed: false, stars: 0, locked: false, emoji: '➕' },
-      { id: 'subtract-stars', title: 'Take Away', type: 'Subtraction time', completed: false, stars: 0, locked: false, emoji: '➖' },
-      { id: 'number-story', title: 'Story Problems', type: 'Word problems', completed: false, stars: 0, locked: true, emoji: '📖' },
-    ],
-  },
-  {
-    id: 'advanced',
-    title: 'Number Ninjas',
-    ageRange: 'Ages 7-9',
-    description: 'Master multiplication basics',
-    color: '#7C8B95',
-    locked: true,
-    progress: 0,
-    emoji: '🥷',
-    games: [
-      { id: 'times-table', title: 'Times 2 & 5', type: 'Easy multiplication', completed: false, stars: 0, locked: true, emoji: '✖️' },
-      { id: 'skip-count', title: 'Skip Counting', type: 'Count by 2s, 5s, 10s', completed: false, stars: 0, locked: true, emoji: '🦘' },
-    ],
-  },
-];
-
 export function MathCurriculum() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [expandedCourse, setExpandedCourse] = useState<string>('beginner');
+
+  const courses: Course[] = [
+    {
+      id: 'beginner',
+      title: t('curriculum.math.courses.beginner.title'),
+      ageRange: t('curriculum.math.courses.beginner.ageRange'),
+      description: t('curriculum.math.courses.beginner.description'),
+      color: '#FDB022',
+      locked: false,
+      progress: 0,
+      emoji: '🔢',
+      games: [
+        { id: 'count-tap', title: t('curriculum.math.games.count-tap.title'), type: t('curriculum.math.games.count-tap.type'), completed: false, stars: 0, locked: false, emoji: '👆' },
+        { id: 'number-match', title: t('curriculum.math.games.number-match.title'), type: t('curriculum.math.games.number-match.type'), completed: false, stars: 0, locked: false, emoji: '🎯' },
+        { id: 'more-less', title: t('curriculum.math.games.more-less.title'), type: t('curriculum.math.games.more-less.type'), completed: false, stars: 0, locked: true, emoji: '⚖️' },
+      ],
+    },
+    {
+      id: 'intermediate',
+      title: t('curriculum.math.courses.intermediate.title'),
+      ageRange: t('curriculum.math.courses.intermediate.ageRange'),
+      description: t('curriculum.math.courses.intermediate.description'),
+      color: '#C08B7E',
+      locked: false,
+      progress: 0,
+      emoji: '✨',
+      games: [
+        { id: 'math-fun', title: t('curriculum.math.games.math-fun.title'), type: t('curriculum.math.games.math-fun.type'), completed: false, stars: 0, locked: false, emoji: '➕' },
+        { id: 'subtract-stars', title: t('curriculum.math.games.subtract-stars.title'), type: t('curriculum.math.games.subtract-stars.type'), completed: false, stars: 0, locked: false, emoji: '➖' },
+        { id: 'number-story', title: t('curriculum.math.games.number-story.title'), type: t('curriculum.math.games.number-story.type'), completed: false, stars: 0, locked: true, emoji: '📖' },
+      ],
+    },
+    {
+      id: 'advanced',
+      title: t('curriculum.math.courses.advanced.title'),
+      ageRange: t('curriculum.math.courses.advanced.ageRange'),
+      description: t('curriculum.math.courses.advanced.description'),
+      color: '#7C8B95',
+      locked: true,
+      progress: 0,
+      emoji: '🥷',
+      games: [
+        { id: 'times-table', title: t('curriculum.math.games.times-table.title'), type: t('curriculum.math.games.times-table.type'), completed: false, stars: 0, locked: true, emoji: '✖️' },
+        { id: 'skip-count', title: t('curriculum.math.games.skip-count.title'), type: t('curriculum.math.games.skip-count.type'), completed: false, stars: 0, locked: true, emoji: '🦘' },
+      ],
+    },
+  ];
 
   const handleGameClick = (courseId: string, gameId: string, locked: boolean) => {
     if (locked) {
@@ -83,34 +86,35 @@ export function MathCurriculum() {
   };
 
   return (
-    <div 
+    <div
       className="min-h-screen px-4 sm:px-6 py-6 sm:py-8"
-      style={{ 
+      style={{
         background: 'linear-gradient(to bottom, #F8F6F3, #EAE6DF)',
         fontFamily: 'var(--font-body)',
       }}
     >
+      <CompanionHelper />
       <div className="max-w-5xl mx-auto">
         <div className="mb-8">
-          <Link 
-            to="/practice" 
+          <Link
+            to="/practice"
             className="inline-flex items-center gap-2 text-gray-500 hover:text-gray-700 transition-colors mb-6"
           >
             <ArrowLeft className="w-5 h-5" />
-            <span style={{ fontSize: '0.9375rem' }}>BACK TO PRACTICE</span>
+            <span style={{ fontSize: '0.9375rem' }}>{t('curriculum.backToPractice')}</span>
           </Link>
 
           <div className="text-center mb-8">
-            <div 
+            <div
               className="w-20 h-20 mx-auto mb-4 rounded-3xl flex items-center justify-center"
               style={{ backgroundColor: '#FDB02220' }}
             >
               <Calculator className="w-10 h-10" style={{ color: '#FDB022' }} />
             </div>
-            
-            <h1 
+
+            <h1
               className="mb-3"
-              style={{ 
+              style={{
                 fontFamily: 'var(--font-display)',
                 fontSize: '2.5rem',
                 fontWeight: 700,
@@ -118,14 +122,14 @@ export function MathCurriculum() {
                 textTransform: 'uppercase',
               }}
             >
-              MATH 🔢
+              {t('curriculum.math.title')}
             </h1>
-            
-            <p 
+
+            <p
               className="text-gray-600"
               style={{ fontSize: '1.125rem' }}
             >
-              Count, add, and solve with confidence!
+              {t('curriculum.math.subtitle')}
             </p>
           </div>
         </div>
@@ -151,17 +155,17 @@ export function MathCurriculum() {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div 
+                    <div
                       className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl"
                       style={{ backgroundColor: `${course.color}20` }}
                     >
                       {course.emoji}
                     </div>
-                    
+
                     <div>
                       <div className="flex items-center gap-3 mb-1">
-                        <h2 
-                          style={{ 
+                        <h2
+                          style={{
                             fontFamily: 'var(--font-display)',
                             fontSize: '1.5rem',
                             fontWeight: 700,
@@ -175,15 +179,15 @@ export function MathCurriculum() {
                           <Lock className="w-5 h-5 text-gray-400" />
                         )}
                       </div>
-                      
-                      <p 
+
+                      <p
                         className="text-gray-500 mb-1"
                         style={{ fontSize: '0.875rem' }}
                       >
                         {course.ageRange}
                       </p>
-                      
-                      <p 
+
+                      <p
                         className="text-gray-600"
                         style={{ fontSize: '0.9375rem' }}
                       >
@@ -191,20 +195,20 @@ export function MathCurriculum() {
                       </p>
                     </div>
                   </div>
-                  
+
                   <div className="text-right">
-                    <div 
+                    <div
                       className="text-2xl font-bold mb-1"
                       style={{ color: course.color }}
                     >
                       {course.progress}%
                     </div>
-                    <div 
+                    <div
                       className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden"
                     >
-                      <div 
+                      <div
                         className="h-full rounded-full transition-all"
-                        style={{ 
+                        style={{
                           width: `${course.progress}%`,
                           backgroundColor: course.color,
                         }}
@@ -216,7 +220,7 @@ export function MathCurriculum() {
 
               {/* Games List */}
               {expandedCourse === course.id && !course.locked && (
-                <div 
+                <div
                   className="px-6 pb-6"
                   style={{ backgroundColor: '#fafafa' }}
                 >
@@ -236,17 +240,17 @@ export function MathCurriculum() {
                       >
                         <div className="flex items-start justify-between mb-3">
                           <div className="text-3xl">{game.emoji}</div>
-                          
+
                           {game.locked ? (
                             <Lock className="w-4 h-4 text-gray-400" />
                           ) : game.completed ? (
                             <CheckCircle2 className="w-5 h-5" style={{ color: course.color }} />
                           ) : null}
                         </div>
-                        
-                        <h3 
+
+                        <h3
                           className="mb-1"
-                          style={{ 
+                          style={{
                             fontFamily: 'var(--font-display)',
                             fontSize: '1.125rem',
                             fontWeight: 700,
@@ -256,21 +260,21 @@ export function MathCurriculum() {
                         >
                           {game.title}
                         </h3>
-                        
-                        <p 
+
+                        <p
                           className="mb-3 text-gray-500"
                           style={{ fontSize: '0.8125rem' }}
                         >
                           {game.type}
                         </p>
-                        
+
                         {!game.locked && (
                           <div className="flex gap-1">
                             {[1, 2, 3].map((star) => (
                               <Star
                                 key={star}
                                 className="w-4 h-4"
-                                style={{ 
+                                style={{
                                   color: star <= game.stars ? '#FDB022' : '#e5e7eb',
                                   fill: star <= game.stars ? '#FDB022' : 'none',
                                 }}
