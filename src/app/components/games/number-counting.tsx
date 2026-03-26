@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { ArrowLeft, Star } from 'lucide-react';
+import { ArrowLeft, Check, Star, X } from 'lucide-react';
 import { OutdoorBackground } from '../outdoor-background';
 import { CompanionHelper, useCompanionMessage } from '../companion-helper';
 import { useSettings } from '../../contexts/settings-context';
@@ -23,6 +23,7 @@ export function NumberCounting() {
   const [showFeedback, setShowFeedback] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [clickedNumbers, setClickedNumbers] = useState<number[]>([]);
+  const [stars, setStars] = useState(3);
   const totalRounds = getRoundsForLevel('beginner'); // Beginner course = 3 rounds
   const { message, celebrate, encourage } = useCompanionMessage();
 
@@ -69,6 +70,7 @@ export function NumberCounting() {
       encourage();
       setIsCorrect(false);
       setShowFeedback(true);
+      setStars(prev => Math.max(0, prev - 1));
     }
   };
 
@@ -78,7 +80,7 @@ export function NumberCounting() {
         setCurrentRound(currentRound + 1);
       } else {
         // Game completed! Save progress
-        completeGame();
+        completeGame(3 - stars, stars);
       }
     } else {
       // Try again - just hide feedback

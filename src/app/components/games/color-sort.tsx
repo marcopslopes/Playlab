@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { ArrowLeft, Star } from 'lucide-react';
+import { ArrowLeft, Check, Star } from 'lucide-react';
 import { OutdoorBackground } from '../outdoor-background';
 import { CompanionHelper, useCompanionMessage } from '../companion-helper';
 import { useSettings } from '../../contexts/settings-context';
