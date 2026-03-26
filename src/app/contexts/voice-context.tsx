@@ -136,8 +136,10 @@ export function VoiceProvider({ children }: { children: ReactNode }) {
           body: JSON.stringify({ text: trimmed }),
         })
 
-        if (!res.ok) {
-          // 503 = no API key configured, 404 = local dev without vercel dev
+        const contentType = res.headers.get('content-type') || ''
+        if (!res.ok || !contentType.includes('audio')) {
+          // Not a real TTS response — fall back to Web Speech.
+          // In Vite dev mode, /api/tts returns index.html (200) due to SPA fallback.
           speakWebSpeech(trimmed, volume, speed, language)
           return
         }
