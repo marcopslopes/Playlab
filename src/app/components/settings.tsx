@@ -1,12 +1,14 @@
 import { Link } from 'react-router';
-import { ArrowLeft, Moon, Sun, Globe, User } from 'lucide-react';
+import { ArrowLeft, Moon, Sun, Globe, User, Volume2 } from 'lucide-react';
 import { useSettings } from '../contexts/settings-context';
 import { useTranslation } from '../hooks/use-translation';
+import { useVoice } from '../contexts/voice-context';
 import { OutdoorBackground } from './outdoor-background';
 
 export function Settings() {
   const { theme, language, age, setTheme, setLanguage, setAge } = useSettings();
   const { t } = useTranslation();
+  const { muted, volume, speed, setMuted, setVolume, setSpeed } = useVoice();
 
   return (
     <div 
@@ -187,8 +189,116 @@ export function Settings() {
             </p>
           </div>
 
+          {/* Voice Setting */}
+          <div
+            className="rounded-3xl p-6"
+            style={{
+              backgroundColor: theme === 'dark' ? 'rgba(228, 220, 207, 0.1)' : 'rgba(31, 32, 35, 0.05)',
+              backdropFilter: 'blur(10px)',
+            }}
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <Volume2 className="w-6 h-6" style={{ color: '#7D9D9C' }} />
+              <h2
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: '1.25rem',
+                  fontWeight: 600,
+                }}
+              >
+                {t('settings.voice')}
+              </h2>
+            </div>
+
+            {/* Mute toggle */}
+            <div className="flex gap-3 mb-4">
+              <button
+                onClick={() => setMuted(false)}
+                className="flex-1 py-3 px-4 rounded-2xl transition-all"
+                style={{
+                  backgroundColor: !muted ? '#7D9D9C' : 'rgba(125, 157, 156, 0.2)',
+                  color: !muted ? '#fff' : theme === 'dark' ? '#E4DCCF' : '#1F2023',
+                  fontWeight: !muted ? 600 : 400,
+                }}
+              >
+                {t('settings.voiceOn')}
+              </button>
+              <button
+                onClick={() => setMuted(true)}
+                className="flex-1 py-3 px-4 rounded-2xl transition-all"
+                style={{
+                  backgroundColor: muted ? '#7D9D9C' : 'rgba(125, 157, 156, 0.2)',
+                  color: muted ? '#fff' : theme === 'dark' ? '#E4DCCF' : '#1F2023',
+                  fontWeight: muted ? 600 : 400,
+                }}
+              >
+                {t('settings.voiceOff')}
+              </button>
+            </div>
+
+            {/* Volume */}
+            <p
+              className="mb-2"
+              style={{
+                fontSize: '0.875rem',
+                color: theme === 'dark' ? 'rgba(228, 220, 207, 0.7)' : 'rgba(31, 32, 35, 0.6)',
+              }}
+            >
+              {t('settings.volume')}
+            </p>
+            <div className="flex gap-3 mb-4">
+              {([0.3, 0.7, 1.0] as const).map((v, i) => {
+                const labels = ['settings.volumeQuiet', 'settings.volumeNormal', 'settings.volumeLoud'] as const;
+                return (
+                  <button
+                    key={v}
+                    onClick={() => setVolume(v)}
+                    className="flex-1 py-3 px-4 rounded-2xl transition-all"
+                    style={{
+                      backgroundColor: volume === v ? '#C08B7E' : 'rgba(192, 139, 126, 0.2)',
+                      color: volume === v ? '#fff' : theme === 'dark' ? '#E4DCCF' : '#1F2023',
+                      fontWeight: volume === v ? 600 : 400,
+                    }}
+                  >
+                    {t(labels[i])}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Speech Speed */}
+            <p
+              className="mb-2"
+              style={{
+                fontSize: '0.875rem',
+                color: theme === 'dark' ? 'rgba(228, 220, 207, 0.7)' : 'rgba(31, 32, 35, 0.6)',
+              }}
+            >
+              {t('settings.speechSpeed')}
+            </p>
+            <div className="flex gap-3">
+              {([0.7, 0.9, 1.1] as const).map((s, i) => {
+                const labels = ['settings.speedSlow', 'settings.speedNormal', 'settings.speedFast'] as const;
+                return (
+                  <button
+                    key={s}
+                    onClick={() => setSpeed(s)}
+                    className="flex-1 py-3 px-4 rounded-2xl transition-all"
+                    style={{
+                      backgroundColor: speed === s ? '#7C8B95' : 'rgba(124, 139, 149, 0.2)',
+                      color: speed === s ? '#fff' : theme === 'dark' ? '#E4DCCF' : '#1F2023',
+                      fontWeight: speed === s ? 600 : 400,
+                    }}
+                  >
+                    {t(labels[i])}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
           {/* Info */}
-          <div 
+          <div
             className="rounded-3xl p-6 text-center"
             style={{
               backgroundColor: theme === 'dark' ? 'rgba(228, 220, 207, 0.05)' : 'rgba(31, 32, 35, 0.03)',
