@@ -1,10 +1,12 @@
 import { Link } from 'react-router';
 import { ArrowLeft, Moon, Sun, Globe, User } from 'lucide-react';
 import { useSettings } from '../contexts/settings-context';
+import { useTranslation } from '../hooks/use-translation';
 import { OutdoorBackground } from './outdoor-background';
 
 export function Settings() {
   const { theme, language, age, setTheme, setLanguage, setAge } = useSettings();
+  const { t } = useTranslation();
 
   return (
     <div 
@@ -26,7 +28,7 @@ export function Settings() {
           }}
         >
           <ArrowLeft className="w-5 h-5" />
-          <span style={{ fontSize: '0.9375rem' }}>BACK</span>
+          <span style={{ fontSize: '0.9375rem' }}>{t('nav.back').toUpperCase()}</span>
         </Link>
 
         {/* Header */}
@@ -39,7 +41,7 @@ export function Settings() {
             textTransform: 'uppercase',
           }}
         >
-          Settings ⚙️
+          {t('settings.title')}
         </h1>
 
         {/* Settings Cards */}
@@ -66,7 +68,7 @@ export function Settings() {
                   fontWeight: 600,
                 }}
               >
-                Theme
+                {t('settings.theme')}
               </h2>
             </div>
             
@@ -80,7 +82,7 @@ export function Settings() {
                   fontWeight: theme === 'light' ? 600 : 400,
                 }}
               >
-                ☀️ Light
+                {t('settings.light')}
               </button>
               <button
                 onClick={() => setTheme('dark')}
@@ -91,7 +93,7 @@ export function Settings() {
                   fontWeight: theme === 'dark' ? 600 : 400,
                 }}
               >
-                🌙 Dark
+                {t('settings.dark')}
               </button>
             </div>
           </div>
@@ -113,33 +115,25 @@ export function Settings() {
                   fontWeight: 600,
                 }}
               >
-                Language
+                {t('settings.language')}
               </h2>
             </div>
             
-            <div className="flex gap-3">
-              <button
-                onClick={() => setLanguage('en')}
-                className="flex-1 py-3 px-4 rounded-2xl transition-all"
-                style={{
-                  backgroundColor: language === 'en' ? '#C08B7E' : 'rgba(192, 139, 126, 0.2)',
-                  color: language === 'en' ? '#fff' : theme === 'dark' ? '#E4DCCF' : '#1F2023',
-                  fontWeight: language === 'en' ? 600 : 400,
-                }}
-              >
-                🇬🇧 English
-              </button>
-              <button
-                onClick={() => setLanguage('pt')}
-                className="flex-1 py-3 px-4 rounded-2xl transition-all"
-                style={{
-                  backgroundColor: language === 'pt' ? '#C08B7E' : 'rgba(192, 139, 126, 0.2)',
-                  color: language === 'pt' ? '#fff' : theme === 'dark' ? '#E4DCCF' : '#1F2023',
-                  fontWeight: language === 'pt' ? 600 : 400,
-                }}
-              >
-                🇵🇹 Português
-              </button>
+            <div className="grid grid-cols-2 gap-3">
+              {(['en', 'pt', 'es', 'ca'] as const).map((lang) => (
+                <button
+                  key={lang}
+                  onClick={() => setLanguage(lang)}
+                  className="py-3 px-4 rounded-2xl transition-all"
+                  style={{
+                    backgroundColor: language === lang ? '#C08B7E' : 'rgba(192, 139, 126, 0.2)',
+                    color: language === lang ? '#fff' : theme === 'dark' ? '#E4DCCF' : '#1F2023',
+                    fontWeight: language === lang ? 600 : 400,
+                  }}
+                >
+                  {t(`settings.languages.${lang}`)}
+                </button>
+              ))}
             </div>
           </div>
 
@@ -160,7 +154,7 @@ export function Settings() {
                   fontWeight: 600,
                 }}
               >
-                Child's Age
+                {t('settings.childAge')}
               </h2>
             </div>
             
@@ -189,7 +183,7 @@ export function Settings() {
                 color: theme === 'dark' ? 'rgba(228, 220, 207, 0.6)' : 'rgba(31, 32, 35, 0.6)',
               }}
             >
-              Age: {age} years old
+              {t('settings.ageLabel', { age })}
             </p>
           </div>
 
@@ -207,7 +201,7 @@ export function Settings() {
                 color: theme === 'dark' ? 'rgba(228, 220, 207, 0.6)' : 'rgba(31, 32, 35, 0.6)',
               }}
             >
-              Settings are saved automatically and apply to the entire app experience.
+              {t('settings.autoSave')}
             </p>
           </div>
         </div>
