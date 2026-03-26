@@ -4,6 +4,8 @@ import { OutdoorBackground } from './outdoor-background';
 import { InteractiveSpheresBackground } from './interactive-spheres-background';
 import { useSettings } from '../contexts/settings-context';
 import { useTranslation } from '../hooks/use-translation';
+import { useVoice } from '../contexts/voice-context';
+import { useProgress } from '../contexts/progress-context';
 
 interface Companion {
   id: string;
@@ -14,9 +16,12 @@ interface Companion {
 
 export function DailySession() {
   const navigate = useNavigate();
-  const { theme, childName } = useSettings();
+  const { theme, childName, language } = useSettings();
   const { t } = useTranslation();
   const [companion, setCompanion] = useState<Companion | null>(null);
+  const { volume, speed, muted } = useVoice();
+  const { progress } = useProgress();
+  const hasSpoken = useRef(false);
 
   useEffect(() => {
     // Load companion from localStorage
@@ -25,6 +30,55 @@ export function DailySession() {
       setCompanion(JSON.parse(savedCompanion));
     }
   }, []);
+
+  useEffect(() => {
+    if (hasSpoken.current) return;
+    if (muted) return;
+    if (!companion) return;
+
+    hasSpoken.current = true;
+
+    const hour = new Date().getHours();
+    const timeOfDay = hour < 12 ? 'morning' : hour < 18 ? 'afternoon' : 'evening';
+    const companionName = companion.name;
+    const companionPersonality = companion.personality;
+    const stars = progress.totalStars;
+    const streak = progress.streakDays;
+
+    let blobUrl: string | null = null;
+
+    const playGreeting = async () => {
+      try {
+        const res = await fetch('/api/speak', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ childName, companionName, companionPersonality, language, timeOfDay, stars, streak }),
+        });
+
+        const contentType = res.headers.get('content-type') || '';
+        if (!res.ok || !contentType.includes('audio')) return;
+
+        const blob = await res.blob();
+        blobUrl = URL.createObjectURL(blob);
+        const audio = new Audio(blobUrl);
+        audio.volume = volume;
+        audio.playbackRate = speed;
+        audio.play().catch(() => {
+          // Autoplay may be blocked — silently ignore
+        });
+      } catch {
+        // Network error — silently skip
+      }
+    };
+
+    playGreeting();
+
+    return () => {
+      if (blobUrl) {
+        URL.revokeObjectURL(blobUrl);
+      }
+    };
+  }, [companion, muted, volume, speed, childName, language]);
 
   const getGreeting = () => {
     const hour = new Date().getHours();
