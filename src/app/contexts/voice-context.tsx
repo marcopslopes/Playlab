@@ -31,9 +31,6 @@ function stopCurrentAudio() {
     currentAudio.pause()
     currentAudio = null
   }
-  if (typeof window !== 'undefined' && window.speechSynthesis) {
-    window.speechSynthesis.cancel()
-  }
 }
 
 function playBlobUrl(url: string, volume: number, speed: number) {
@@ -49,26 +46,6 @@ function playBlobUrl(url: string, volume: number, speed: number) {
   }
 }
 
-function speakWebSpeech(text: string, volume: number, speed: number, language: string) {
-  if (typeof window === 'undefined' || !window.speechSynthesis) return
-  window.speechSynthesis.cancel()
-  const utterance = new SpeechSynthesisUtterance(text)
-  utterance.volume = volume
-  utterance.rate = speed
-  utterance.lang = language === 'pt' ? 'pt-PT' : 'en-GB'
-
-  const voices = window.speechSynthesis.getVoices()
-  const preferred =
-    language === 'pt'
-      ? voices.find((v) => v.lang.startsWith('pt'))
-      : voices.find((v) =>
-          ['Samantha', 'Karen', 'Google UK English Female', 'Google US English'].some((n) =>
-            v.name.includes(n)
-          )
-        )
-  if (preferred) utterance.voice = preferred
-  window.speechSynthesis.speak(utterance)
-}
 
 // ─── Context ──────────────────────────────────────────────────────────────────
 
@@ -137,10 +114,7 @@ export function VoiceProvider({ children }: { children: ReactNode }) {
         })
 
         const contentType = res.headers.get('content-type') || ''
-        if (!res.ok || !contentType.includes('audio')) {
-          speakWebSpeech(trimmed, volume, speed, language)
-          return
-        }
+        if (!res.ok || !contentType.includes('audio')) return // silent — no fallback
 
         const blob = await res.blob()
         const url = URL.createObjectURL(blob)
@@ -154,8 +128,7 @@ export function VoiceProvider({ children }: { children: ReactNode }) {
         }
         playBlobUrl(url, volume, speed)
       } catch {
-        // Network error — fall back to Web Speech
-        speakWebSpeech(trimmed, volume, speed, language)
+        // Network error — silent, no fallback
       }
     },
     [muted, volume, speed, language]
